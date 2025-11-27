@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WatchGuard Partner Portal - Menu Mockup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #d32f2f;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .menu-container {
+            display: flex;
+            min-height: 500px;
+        }
+
+        /* Level 1 Menu */
+        .level-1-menu {
+            width: 200px;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .level-1-item {
+            padding: 18px 20px;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .level-1-item:hover {
+            background: #34495e;
+        }
+
+        .level-1-item.active {
+            background: #34495e;
+            border-left-color: #d32f2f;
+        }
+
+        .level-1-item.external {
+            color: #3498db;
+        }
+
+        /* Level 2 Menu */
+        .level-2-menu {
+            width: 250px;
+            background: #ecf0f1;
+            border-right: 1px solid #ddd;
+            display: none;
+        }
+
+        .level-2-menu.active {
+            display: block;
+        }
+
+        .level-2-header {
+            background: #bdc3c7;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #95a5a6;
+        }
+
+        .level-2-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .level-2-item:hover {
+            background: #d5dbdb;
+        }
+
+        .level-2-item.active {
+            background: white;
+            border-left-color: #d32f2f;
+            font-weight: 500;
+        }
+
+        /* Level 3 Menu */
+        .level-3-menu {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            display: none;
+        }
+
+        .level-3-menu.active {
+            display: block;
+        }
+
+        .level-3-header {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d32f2f;
+        }
+
+        .level-3-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .level-3-item:hover {
+            background: #f8f9fa;
+            border-left-color: #d32f2f;
+            transform: translateX(5px);
+        }
+
+        .level-3-item a {
+            color: #2c3e50;
+            text-decoration: none;
+            display: block;
+        }
+
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #95a5a6;
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>WatchGuard Partner Portal</h1>
+        </div>
+
+        <div class="breadcrumb" id="breadcrumb">
+            <span>Home</span>
+        </div>
+
+        <div class="menu-container">
+            <!-- LEVEL 1 MENU -->
+            <nav class="level-1-menu">
+                <div class="level-1-item" data-section="setup">
+                    <span class="icon">⚙️</span> Set-up
+                </div>
+                <div class="level-1-item" data-section="learn">
+                    <span class="icon">📚</span> Learn
+                </div>
+                <div class="level-1-item" data-section="sell">
+                    <span class="icon">💼</span> Sell
+                </div>
+                <div class="level-1-item" data-section="manage">
+                    <span class="icon">📊</span> Manage
+                </div>
+                <div class="level-1-item external" data-section="blog">
+                    <span class="icon">📝</span> Blog ↗
+                </div>
+            </nav>
+
+            <!-- LEVEL 2 MENU - SET-UP -->
+            <div class="level-2-menu" id="setup-menu">
+                <div class="level-2-header">Set-up</div>
+                <div class="level-2-item" data-category="getting-started">
+                    Getting Started
+                </div>
+                <div class="level-2-item" data-category="program-resources">
+                    Program Resources
+                </div>
+            </div>
+
+            <!-- LEVEL 2 MENU - LEARN -->
+            <div class="level-2-menu" id="learn-menu">
+                <div class="level-2-header">Learn</div>
+                <div class="level-2-item" data-category="product">
+                    Product
+                </div>
+                <div class="level-2-item" data-category="promo">
+                    Promo
+                </div>
+                <div class="level-2-item" data-category="platform">
+                    Platform
+                </div>
+            </div>
+
+            <!-- LEVEL 2 MENU - SELL -->
+            <div class="level-2-menu" id="sell-menu">
+                <div class="level-2-header">Sell</div>
+                <div class="level-2-item" data-category="sales-tools">
+                    Sales Tools
+                </div>
+                <div class="level-2-item" data-category="go-to-market">
+                    Go-To-Market
+                </div>
+            </div>
+
+            <!-- LEVEL 2 MENU - MANAGE -->
+            <div class="level-2-menu" id="manage-menu">
+                <div class="level-2-header">Manage</div>
+                <div class="level-2-item" data-category="product-manage">
+                    Product
+                </div>
+                <div class="level-2-item" data-category="account">
+                    Account
+                </div>
+            </div>
+
+            <!-- LEVEL 3 MENUS -->
+            <!-- Getting Started -->
+            <div class="level-3-menu" id="getting-started-menu">
+                <div class="level-3-header">Getting Started</div>
+                <div class="level-3-item">
+                    <a href="#watchguardone">WatchGuardONE Starts Here</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#profile-builder">Profile Builder</a>
+                </div>
+            </div>
+
+            <!-- Program Resources -->
+            <div class="level-3-menu" id="program-resources-menu">
+                <div class="level-3-header">Program Resources</div>
+                <div class="level-3-item">
+                    <a href="#cert-faq">Certification FAQ</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#channel-program">Channel Program</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#specializations">Specializations</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#rebate-program">Rebate Program</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#mssp">MSSP Specialization</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#data-privacy">Data Privacy Resources</a>
+                </div>
+            </div>
+
+            <!-- Product (Learn) -->
+            <div class="level-3-menu" id="product-menu">
+                <div class="level-3-header">Product</div>
+                <div class="level-3-item">
+                    <a href="#product-certs">Product Certifications</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#learning-center">Learning Center</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#flexpay">FlexPay</a>
+                </div>
+            </div>
+
+            <!-- Promo -->
+            <div class="level-3-menu" id="promo-menu">
+                <div class="level-3-header">Promo</div>
+                <div class="level-3-item">
+                    <a href="#erate">eRate Program (US)</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#wise">WISE Program</a>
+                </div>
+            </div>
+
+            <!-- Platform -->
+            <div class="level-3-menu" id="platform-menu">
+                <div class="level-3-header">Platform</div>
+                <div class="level-3-item">
+                    <a href="#tech-partners">Technology Partners</a>
+                </div>
+            </div>
+
+            <!-- Sales Tools -->
+            <div class="level-3-menu" id="sales-tools-menu">
+                <div class="level-3-header">Sales Tools</div>
+                <div class="level-3-item">
+                    <a href="#nfr">Not for Resale Products</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#skus">SKUs, Price Lists, MAP Policy</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#deal-reg">Deal Registration</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#leads">Leads and Opportunities</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#wifi">Wi-Fi design Service</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#personas">Buyer Personas</a>
+                </div>
+            </div>
+
+            <!-- Go-To-Market -->
+            <div class="level-3-menu" id="go-to-market-menu">
+                <div class="level-3-header">Go-To-Market</div>
+                <div class="level-3-item">
+                    <a href="#endpoint">Selling Endpoint Security</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#identity">Selling Identity Security</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#zero-trust">Selling Zero-Trust</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#managed">Selling Managed Services</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#network">Selling Network Security ++</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#industry">Selling by Industry</a>
+                </div>
+            </div>
+
+            <!-- Product (Manage) -->
+            <div class="level-3-menu" id="product-manage-menu">
+                <div class="level-3-header">Product</div>
+                <div class="level-3-item">
+                    <a href="#serial">Serial Number Look-up</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#renewals">Renewals Watch</a>
+                </div>
+            </div>
+
+            <!-- Account -->
+            <div class="level-3-menu" id="account-menu">
+                <div class="level-3-header">Account</div>
+                <div class="level-3-item">
+                    <a href="#tracker">Business Tracker</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#marketing-funds">Marketing Funds</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#spiffs">Security Pays SPIFFS</a>
+                </div>
+            </div>
+
+            <!-- Empty state (initial) -->
+            <div class="level-3-menu active" id="empty-state">
+                <div class="empty-state">
+                    <div class="icon">👈</div>
+                    <p>Selecione uma opção no menu para começar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let currentLevel1 = null;
+        let currentLevel2 = null;
+
+        // Get all menu items
+        const level1Items = document.querySelectorAll('.level-1-item');
+        const level2Items = document.querySelectorAll('.level-2-item');
+        const breadcrumb = document.getElementById('breadcrumb');
+
+        // Level 1 HOVER handlers (mouseenter)
+        level1Items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const section = item.dataset.section;
+
+                // Handle Blog external link - only on click
+                if (section === 'blog') {
+                    return;
+                }
+
+                // Remove all active states
+                level1Items.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.level-2-menu').forEach(m => m.classList.remove('active'));
+                document.querySelectorAll('.level-3-menu').forEach(m => m.classList.remove('active'));
+                level2Items.forEach(i => i.classList.remove('active'));
+
+                // Set active state
+                item.classList.add('active');
+                currentLevel1 = section;
+                currentLevel2 = null;
+
+                // Show corresponding level 2 menu
+                const level2Menu = document.getElementById(`${section}-menu`);
+                if (level2Menu) {
+                    level2Menu.classList.add('active');
+                }
+
+                // Hide empty state
+                document.getElementById('empty-state').classList.remove('active');
+
+                // Update breadcrumb
+                updateBreadcrumb(section);
+            });
+
+            // Click handler only for Blog
+            item.addEventListener('click', () => {
+                const section = item.dataset.section;
+                if (section === 'blog') {
+                    window.open('https://www.watchguard.com/blog', '_blank');
+                }
+            });
+        });
+
+        // Level 2 HOVER handlers (mouseenter)
+        level2Items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const category = item.dataset.category;
+
+                // Remove active states from level 2 and 3
+                level2Items.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.level-3-menu').forEach(m => m.classList.remove('active'));
+
+                // Set active state
+                item.classList.add('active');
+                currentLevel2 = category;
+
+                // Show corresponding level 3 menu
+                const level3Menu = document.getElementById(`${category}-menu`);
+                if (level3Menu) {
+                    level3Menu.classList.add('active');
+                }
+
+                // Update breadcrumb
+                updateBreadcrumb(currentLevel1, item.textContent.trim());
+            });
+        });
+
+        // Update breadcrumb
+        function updateBreadcrumb(level1, level2) {
+            let breadcrumbHTML = '<span>Home</span>';
+
+            if (level1) {
+                const level1Text = level1.charAt(0).toUpperCase() + level1.slice(1).replace('-', ' ');
+                breadcrumbHTML += ` <span>›</span> <span>${level1Text}</span>`;
+            }
+
+            if (level2) {
+                breadcrumbHTML += ` <span>›</span> <span>${level2}</span>`;
+            }
+
+            breadcrumb.innerHTML = breadcrumbHTML;
+        }
+
+        // Level 3 item clicks (just for demonstration)
+        document.querySelectorAll('.level-3-item a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert(`Navegando para: ${link.textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>

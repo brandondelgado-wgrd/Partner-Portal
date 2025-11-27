@@ -1,0 +1,492 @@
+/* WatchGuard Partner Portal - Common Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --watchguard-red: #e81410;
+    --dark-gray: #2c3e50;
+    --footer-bg: #232D37;
+    --medium-gray: #7f8c8d;
+    --light-gray: #ecf0f1;
+    --white: #ffffff;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+/* ==================== HEADER ==================== */
+header {
+    background: var(--white);
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 2.5rem;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.25rem;
+    margin: 0;
+    align-items: center;
+}
+
+/* Multi-level menu */
+.multi-nav .nav-item {
+    position: relative;
+}
+
+.multi-nav a {
+    text-decoration: none;
+    color: var(--dark-gray);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.18s, background 0.18s;
+    padding: 0.4rem 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.multi-nav a:hover,
+.multi-nav .nav-item.open > a {
+    color: var(--watchguard-red);
+}
+
+.submenu-toggle {
+    display: inline-block;
+    background: transparent;
+    border: 0;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0 6px;
+}
+
+/* Dropdown containers */
+.multi-nav .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    padding: 0.5rem;
+    z-index: 999;
+    margin-top: 0;
+}
+
+/* Add padding to nav item to create seamless hover area */
+.multi-nav .nav-item {
+    padding-bottom: 0.5rem;
+}
+
+.multi-nav .nav-item > a,
+.multi-nav .nav-item > .submenu-toggle {
+    position: relative;
+    z-index: 1000;
+}
+
+.multi-nav .submenu .submenu-group {
+    margin-bottom: 0.5rem;
+    list-style: none;
+}
+
+.multi-nav .submenu-group strong {
+    display: block;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+}
+
+.multi-nav .submenu li {
+    list-style: none;
+}
+
+.multi-nav .submenu a {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    color: var(--dark-gray);
+    font-weight: 500;
+    text-transform: none;
+    font-size: 0.92rem;
+}
+
+.multi-nav .submenu a:hover {
+    color: var(--watchguard-red);
+    background: rgba(232,20,16,0.03);
+}
+
+/* Nested level (level 3) positioning */
+.multi-nav .submenu .submenu-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Show on hover for desktop */
+@media (hover: hover) and (min-width: 993px) {
+    .multi-nav .nav-item:hover > .submenu {
+        display: block;
+    }
+}
+
+/* Mobile: stack and use open class */
+@media (max-width: 992px) {
+    .nav-menu, .multi-nav {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .multi-nav .submenu {
+        position: static;
+        box-shadow: none;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .submenu-toggle {
+        display: inline-block;
+    }
+
+    .multi-nav .nav-item.open > .submenu {
+        display: block;
+    }
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 0.286rem;
+    overflow: hidden;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.857rem;
+    padding: 0.6rem 1rem;
+    width: 280px;
+    color: var(--dark-gray);
+}
+
+.search-box input::placeholder {
+    color: #999;
+}
+
+.search-box button {
+    background: var(--watchguard-red);
+    border: none;
+    color: var(--white);
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box button i {
+    font-size: 1rem;
+}
+
+.btn-support,
+.btn-login {
+    padding: 0.571rem 1.429rem;
+    border-radius: 0.286rem;
+    text-decoration: none;
+    font-size: 0.857rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid;
+}
+
+.btn-support {
+    border-color: var(--watchguard-red);
+    color: var(--watchguard-red);
+    background: var(--white);
+}
+
+.btn-support:hover {
+    background: var(--watchguard-red);
+    color: var(--white);
+}
+
+.btn-login {
+    border-color: var(--dark-gray);
+    color: var(--dark-gray);
+    background: var(--white);
+}
+
+.btn-login:hover {
+    background: var(--dark-gray);
+    color: var(--white);
+}
+
+/* Bootstrap-style Submenu Dropdown Styles */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+    margin-left: 0;
+    display: none;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover > a:after {
+    border-left-color: var(--watchguard-red);
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+}
+
+/* Enhanced submenu nesting support */
+.multi-nav .submenu-group.has-submenu {
+    position: relative;
+}
+
+.multi-nav .submenu-group.has-submenu > ul {
+    display: none;
+    position: absolute;
+    left: calc(100% - 4px);
+    top: -0.5rem;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    padding: 0.5rem;
+    z-index: 1000;
+    margin-left: 4px;
+}
+
+.multi-nav .submenu-group.has-submenu:hover > ul {
+    display: block;
+}
+
+.multi-nav .submenu-group.has-submenu > strong {
+    padding: 0.35rem 0.5rem;
+    display: block;
+    margin: -0.35rem -0.5rem 0.35rem -0.5rem;
+}
+
+.multi-nav .submenu-group.has-submenu > strong:after {
+    content: " ▸";
+    float: right;
+    color: var(--medium-gray);
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+    background: var(--footer-bg);
+    color: var(--white);
+    padding: 3rem 0 2rem;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-column h3 {
+    font-size: 0.857rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    color: var(--white);
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.footer-column ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.857rem;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: var(--watchguard-red);
+}
+
+.social-links {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.571rem;
+}
+
+.social-links a {
+    color: var(--white);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--watchguard-red);
+}
+
+.footer-logo {
+    margin-top: 1rem;
+}
+
+.footer-logo img {
+    height: 2.143rem;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 992px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .header-center {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Remove extra padding on mobile */
+    .multi-nav .nav-item {
+        padding-bottom: 0;
+    }
+
+    .multi-nav .submenu-group.has-submenu > strong {
+        padding: 0;
+        margin: 0 0 0.35rem 0;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Mobile nested submenu styles */
+    .dropdown-submenu > .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-left: 20px;
+        background-color: #f5f5f5;
+    }
+
+    .dropdown-submenu > a:after {
+        display: none;
+    }
+
+    .multi-nav .submenu-group.has-submenu > ul {
+        position: static;
+        box-shadow: none;
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+        background-color: #f5f5f5;
+    }
+
+    .multi-nav .submenu-group.has-submenu > strong:after {
+        content: " ▼";
+    }
+
+    .multi-nav .submenu-group.has-submenu.open > ul {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
