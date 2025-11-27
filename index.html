@@ -19,39 +19,517 @@
     <!-- Page-specific styles -->
     <style>
         /* Add your page-specific styles here */
-        .hero {
-            background: linear-gradient(135deg, #b91c1c 0%, var(--watchguard-red) 100%);
-            padding: 4.286rem 2rem;
+         .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-header {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-header h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--dark-gray);
+        }
+
+        .user-name {
+            font-weight: 700;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        /* Latest Updates Section */
+        .latest-updates {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .updates-title {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
             text-align: center;
         }
 
-        .hero h1 {
+        .updates-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .update-card {
+            flex: 0 0 calc(33.333% - 1rem);
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .update-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .update-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .update-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .update-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--watchguard-red);
             color: var(--white);
-            font-size: 2.857rem;
-            font-weight: 300;
-            letter-spacing: 0.05rem;
+            font-size: 0.714rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 0.25rem;
+            width: fit-content;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .content-section {
-            margin-bottom: 3rem;
-        }
-
-        .content-section h2 {
-            font-size: 1.714rem;
+        .update-title {
+            font-size: 1.1rem;
             color: var(--dark-gray);
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .update-date {
+            font-size: 0.786rem;
+            color: var(--medium-gray);
+        }
+
+        .update-description {
+            color: var(--dark-gray);
+            line-height: 1.5;
+            font-size: 0.857rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .update-link {
+            color: var(--watchguard-red);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.929rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .update-link:hover {
+            gap: 0.75rem;
+        }
+
+        .update-link::after {
+            content: '→';
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .carousel-btn {
+            background: var(--white);
+            border: 2px solid var(--watchguard-red);
+            color: var(--watchguard-red);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .carousel-btn:hover {
+            background: var(--watchguard-red);
+            color: var(--white);
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .carousel-dot {
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--watchguard-red);
+            transform: scale(1.3);
+        }
+
+        /* Quick Links Sidebar */
+        .quick-links {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .quick-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            font-weight: 700;
+        }
+
+        .quick-links ul {
+            list-style: none;
+        }
+
+        .quick-links li {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .quick-links li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .quick-links li p {
+            font-size: 0.857rem;
+            color: var(--medium-gray);
+            margin-top: 0.25rem;
+        }
+
+        /* Cards */
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 2rem;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            font-weight: 700;
+            border-bottom: 2px solid var(--watchguard-red);
+            padding-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark-gray);
+            font-weight: 700;
+        }
+
+        .partnership-card {
+            grid-column: 1 / -1;
+        }
+
+        .tracker-card,
+        .renewals-card {
+            grid-column: span 1;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.286rem;
+            font-weight: 600;
+            font-size: 0.857rem;
+        }
+
+        .status-badge.gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #5a4a00;
+        }
+
+        .status-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .status-info p {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .status-info strong {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        /* Tables */
+        .specializations-table,
+        .relationships-table,
+        .tracker-table,
+        .leads-table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background: #f8f8f8;
+        }
+
+        table th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.857rem;
+            color: var(--dark-gray);
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.857rem;
+        }
+
+        table tbody tr:hover {
+            background: #fafafa;
+        }
+
+        .icon-check {
+            color: #27ae60;
+            font-weight: 700;
+        }
+
+        .icon-x {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+
+        /* Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.571rem 1.429rem;
+            border-radius: 0.286rem;
+            text-decoration: none;
+            font-size: 0.857rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-outline {
+            border-color: var(--watchguard-red);
+            color: var(--watchguard-red);
+            background: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--watchguard-red);
+            color: var(--white);
+        }
+
+        /* Tracker specific */
+        .tracker-info {
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 0.286rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .tracker-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        .sales-goals {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.286rem;
+        }
+
+        .sales-goals h3 {
+            color: var(--watchguard-red);
+            font-size: 1rem;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .sales-goals p {
+            margin-bottom: 0.5rem;
+            font-size: 0.857rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--medium-gray);
+            font-style: italic;
+            padding: 2rem !important;
+        }
+
+        .view-all {
+            text-align: right;
+            margin-top: 1rem;
+        }
+
+        /* Chart */
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1rem;
+        }
+
+        .no-data {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--medium-gray);
+        }
+
+        .chart-label {
+            font-size: 0.857rem;
+            color: var(--medium-gray);
             font-weight: 500;
         }
 
-        .content-section p {
-            color: var(--medium-gray);
-            line-height: 1.8;
+        /* Responsive */
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .partnership-card,
+            .tracker-card,
+            .renewals-card {
+                grid-column: span 1;
+            }
+
+            .update-card {
+                flex: 0 0 calc(50% - 0.75rem);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-links {
+                position: static;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 1rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .update-card {
+                flex: 0 0 100%;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            table th,
+            table td {
+                padding: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -59,33 +537,235 @@
     <!-- Header (loaded dynamically) -->
     <div id="header-placeholder"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Page Title Here</h1>
-    </section>
+    <div class="page-container">
+        <header class="welcome-header">
+            <h1>Welcome <span class="user-name">Brandon Delgado, WatchGuard Technologies (ACC-0290399)</span></h1>
+        </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <section class="content-section">
-            <h2>Section Title</h2>
-            <p>Your content goes here...</p>
+        <section class="latest-updates">
+            <h2 class="updates-title">Latest Updates for You</h2>
+            <div class="updates-carousel" id="updatesCarousel">
+                <!-- Será preenchido dinamicamente pelo JavaScript -->
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn prev" id="prevUpdate" aria-label="Previous update">‹</button>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <button class="carousel-btn next" id="nextUpdate" aria-label="Next update">›</button>
+            </div>
         </section>
 
-        <section class="content-section">
-            <h2>Another Section</h2>
-            <p>More content...</p>
-        </section>
-    </main>
+        <div class="content-wrapper">
+            <main class="main-content">
+                <!-- Section atualizada do Partnership Card -->
+                <section class="card partnership-card">
+                    <div class="partnership-header">
+                        <div class="status-column">
+                            <p class="label">Your Status:</p>
+                            <p class="value"><span id="partnerStatus" class="status-badge"></span></p>
+                            <p class="label">WatchGuardONE Contact(s):</p>
+                            <p class="value contacts" id="partnerContacts"></p>
+                        </div>
+                        <div class="team-column">
+                            <p class="label">Your WatchGuard Team:</p>
+                            <p class="value">CAM: <span id="camName"></span></p>
+                            <p class="value">SE: <span id="seName"></span></p>
+                            <p class="value">FMM: <span id="fmmName"></span></p>
+                        </div>
+                    </div>
+
+                    <h2 class="dashboard-title"><span id="partnerName">[Insert Name]</span> Partnership Dashboard</h2>
+
+                    <div class="earnings-banner">
+                        <p>Total Partnership Earnings/Savings for current year: <span class="amount-green" data-target="5000000">$0</span></p>
+                    </div>
+
+                    <h3 class="section-title">Current Quarter</h3>
+
+                    <div class="quarter-stats">
+                        <div class="stat-box">
+                            <p class="stat-label">Front-End Discount Total:</p>
+                            <p class="stat-value amount-green" data-target="8000000">$0</p>
+                            <p class="stat-label">MDF:</p>
+                            <p class="stat-value amount-green" data-target="9000000">$0</p>
+                            <p class="stat-label">Co-Op:</p>
+                            <p class="stat-value amount-green" data-target="8000000">$0</p>
+                        </div>
+
+                        <div class="stat-box">
+                            <p class="stat-label">Rebate Progress:</p>
+                            <div class="progress-circle" data-progress="75">
+                                <svg width="120" height="120" viewBox="0 0 120 120">
+                                    <circle class="progress-bg" cx="60" cy="60" r="50" />
+                                    <circle class="progress-bar" cx="60" cy="60" r="50" />
+                                </svg>
+                                <div class="progress-text">
+                                    <span class="progress-value">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-box">
+                            <p class="stat-label">Rebate at Current Level:</p>
+                            <p class="stat-value amount-green" data-target="9000000">$0</p>
+                            <p class="stat-label">Rebate if 3rd Specialization is completed:</p>
+                            <p class="stat-value amount-green" data-target="9000000">$0</p>
+                        </div>
+
+                        <div class="stat-box">
+                            <p class="stat-label">Deals Registered:</p>
+                            <p class="stat-value stat-number" data-target="155">0</p>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title">WatchGuardONE Specializations</h3>
+
+                    <div class="tier-progress">
+                        <div class="progress-bar-wrapper">
+                            <span class="progress-number" id="tierProgressStart">0</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill" id="tierProgressBar" data-percent="0%"></div>
+                            </div>
+                            <span class="progress-number" id="tierProgressEnd">12</span>
+                        </div>
+                        <p class="progress-label" id="tierProgressLabel">Progress to Next WatchGuardONE Level</p>
+                        <div class="tier-markers">
+                            <div class="tier-marker" data-tier="registered">
+                                <span class="marker-dot"></span>
+                                <span class="marker-label">Registered<br>Reseller</span>
+                            </div>
+                            <div class="tier-marker" data-tier="silver">
+                                <span class="marker-dot"></span>
+                                <span class="marker-label">Silver</span>
+                            </div>
+                            <div class="tier-marker" data-tier="gold">
+                                <span class="marker-dot"></span>
+                                <span class="marker-label">Gold</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="specializations-badges" id="specializationsBadges">
+                        <!-- Será preenchido dinamicamente pelo JavaScript -->
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="#" class="btn btn-outline">Program Overview</a>
+                        <a href="#" class="btn btn-outline">NFR Requirements</a>
+                        <a href="#" class="btn btn-outline">Profile Builder</a>
+                    </div>
+                </section>
+
+                <section class="card tracker-card">
+                    <h2>Business Tracker</h2>
+                    
+                    <div class="tracker-info">
+                        <p><strong>Last Updated:</strong></p>
+                        <p><strong>Total Sales:</strong> $0.00</p>
+                        <p><strong>Total Rebate Opportunity:</strong> $0.00</p>
+                    </div>
+
+                    <div class="sales-goals">
+                        <h3>What are my next sales goals?</h3>
+                        <p>Gold and Platinum Partner rebate is earned once quarterly sales target has been achieved and POS data has been submitted.</p>
+                        <a href="#" class="link-red">More about what is tracked and what is not</a>
+                    </div>
+
+                    <table class="tracker-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>QTY</th>
+                                <th>SKU</th>
+                                <th>Rebate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" class="empty-state">No data available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="view-all">
+                        <a href="#" class="link-red">View All</a>
+                    </div>
+                </section>
+
+                <section class="card renewals-card">
+                    <h2>Your Renewals</h2>
+                    
+                    <p>Take action on renewals today! Use Renewals Watch to view upcoming expirations and more for your customer products.</p>
+
+                    <div class="action-buttons">
+                        <a href="#" class="btn btn-outline">Upcoming Renewals</a>
+                        <a href="#" class="btn btn-outline">Manage Renewals</a>
+                        <a href="#" class="btn btn-outline">Claim a Device</a>
+                    </div>
+
+                    <h3>Current Customer Relationships</h3>
+                    <table class="relationships-table">
+                        <thead>
+                            <tr>
+                                <th>Relationship Type</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Preferred Partner</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Associated Partner</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+
+            <aside class="quick-links">
+                <h3>Find It Fast</h3>
+                <ul>
+                    <li>
+                        <a href="#" class="link-red">Price List, SKUs and MAP policy</a>
+                        <p>Download the latest price list</p>
+                    </li>
+                    <li>
+                        <a href="#" class="link-red">Leads and Opportunities</a>
+                        <p>Accept, manage, convert</p>
+                    </li>
+                    <li>
+                        <a href="#" class="link-red">Deal Registration</a>
+                        <p>Register your deals</p>
+                    </li>
+                    <li>
+                        <a href="#" class="link-red">Renewals Watch</a>
+                        <p>Manage your renewals</p>
+                    </li>
+                    <li>
+                        <a href="#" class="link-red">Learning Center</a>
+                        <p>Sales and technical training</p>
+                    </li>
+                    <li>
+                        <a href="#" class="link-red">Sales Promotions</a>
+                        <p>View available promotions</p>
+                    </li>
+                    <li>
+                        <a href="#" class="link-red">Update My Profile</a>
+                        <p>Keep your information current</p>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </div>
 
     <!-- Footer (loaded dynamically) -->
     <div id="footer-placeholder"></div>
 
     <!-- Common JavaScript -->
     <script src="js/common.js"></script>
-
-    <!-- Page-specific JavaScript (optional) -->
-    <script>
-        // Add your page-specific JavaScript here
-    </script>
+    <script src="js/partnership-dashboard.js"></script>
+    <script src="js/updates-carousel.js"></script>
 </body>
 </html>

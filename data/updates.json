@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Important Updates to the WatchGuardONE Rebate Program",
+        "description": "We're pleased to announce an update to our WatchGuardONE Partner Program, designed to better support your growth and expand your opportunities to earn rebates.",
+        "date": "2025-01-15",
+        "badge": "Program Update",
+        "image": "assets/marketing/Reconnected_Thumb.jpg",
+        "link": "/updates/rebate-program-2025"
+    },
+    {
+        "id": 2,
+        "title": "New Marketing Campaign Kits Available",
+        "description": "Access our latest marketing campaign resources including email templates, social media content, and case studies to help you generate more leads.",
+        "date": "2025-01-10",
+        "badge": "Marketing",
+        "image": "assets/marketing/Reconnected_Thumb.jpg",
+        "link": "/marketing-kits"
+    },
+    {
+        "id": 3,
+        "title": "Q1 2025 Sales Promotions Now Live",
+        "description": "Check out our exclusive Q1 promotions with enhanced rebates on Network Security and Endpoint Security solutions. Limited time offer!",
+        "date": "2025-01-05",
+        "badge": "Promotion",
+        "image": "assets/marketing/Reconnected_Thumb.jpg",
+        "link": "/promotions/q1-2025"
+    },
+    {
+        "id": 4,
+        "title": "New Product Training Courses",
+        "description": "Expand your expertise with our new certification courses covering WatchGuard's latest security solutions. Get certified and unlock new opportunities.",
+        "date": "2024-12-20",
+        "badge": "Training",
+        "image": "assets/marketing/Reconnected_Thumb.jpg",
+        "link": "/learning-center/new-courses"
+    }
+]
