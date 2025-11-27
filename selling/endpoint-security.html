@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Common Styles -->
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="../css/common.css">
 
     <!-- Page-specific styles -->
     <style>
@@ -693,6 +693,29 @@
     <div id="footer-placeholder"></div>
 
     <!-- Common JavaScript -->
-    <script src="js/common.js"></script>
+    <script>
+        // Adjust paths for subdirectory
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header
+            fetch('../includes/header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-placeholder').innerHTML = html;
+                    if (typeof initializeMenu === 'function') {
+                        initializeMenu();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('../includes/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-placeholder').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        });
+    </script>
+    <script src="../js/common.js"></script>
 </body>
 </html>

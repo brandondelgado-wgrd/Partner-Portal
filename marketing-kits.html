@@ -140,7 +140,7 @@
         /* Campaign Grid */
         .campaigns-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(4, 1fr); /* Desktop: 4 columns */
             gap: 2rem;
             margin-bottom: 3rem;
         }
@@ -222,9 +222,15 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .campaigns-grid {
+                grid-template-columns: repeat(3, 1fr); /* Large tablet / small desktop: 3 columns */
+            }
+        }
+
         @media (max-width: 992px) {
             .campaigns-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
             }
         }
 
