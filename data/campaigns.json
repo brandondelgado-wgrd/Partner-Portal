@@ -1,0 +1,200 @@
+[
+  {
+    "href": "https://watchguard.widencollective.com/portals/uhnvwhmo/FireCloudTotalAccess",
+    "type": "cloud-remote",
+    "badge": "New",
+    "image": "./assets/marketing/thms_FireCloud_Total_Access.jpg",
+    "alt": "FireCloud Marketing Campaign Kit",
+    "title": "FireCloud Marketing Campaign Kit",
+    "description": "FireCloud Total Access isn't just another product launch — it's your opportunity to win recurring, high-margin business by solving one of today's biggest pain points: secure remote access." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/x40ire6g/FireboxRackmountFirewallsMCK",
+    "type": "network-security",
+    "badge": "New",
+    "image": "./assets/marketing/thm_NEW_Rackmount_MCK.jpg",
+    "alt": "Next-Gen Firebox Rackmount",
+    "title": "Next-Gen Firebox Rackmount",
+    "description": "Everything you need to generate awareness, drive demand, and boost sales with WatchGuard's new Firebox rackmount appliances." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/lvzseyew/FireboxTabletopFirewalls",
+    "type": "network-security",
+    "badge": "New",
+    "image": "./assets/marketing/thmb_PP_Tabletop_2025.jpg",
+    "alt": "Firebox Tabletop Campaign Kit",
+    "title": "Firebox Tabletop Campaign Kit",
+    "description": "Everything you need to generate awareness, drive demand, and boost sales with WatchGuard's next-gen tabletop appliances. This kit features ready-to-use marketing assets, messaging tools, and promotional resources." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/4b78kcr2/PP_MCK_Real_Security_Real_World",
+    "type": "programs-education",
+    "badge": "New",
+    "image": "./assets/marketing/thm_Widen_PP_RSWR (1).jpg",
+    "alt": "Real Security for the Real World",
+    "title": "Real Security for the Real World",
+    "description": "For three decades, WatchGuard has made advanced security solutions a reality for every organization, enabling them with Real Security for the Real World. Use this marketing kit to promote your brand with real security." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/ah99wlod/MakingtheSwitchtoaNewFirebox",
+    "type": "network-security",
+    "badge": "New",
+    "image": "./assets/marketing/MCK_Portal_FB_EOL.jpg",
+    "alt": "Making the Switch to a New Firebox",
+    "title": "Making the Switch to a New Firebox",
+    "description": "Upgrading to a new Firebox firewall enhances network security by providing advanced threat protection, increased performance, and scalability to accommodate future growth." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/z0bsj1lo/MFAAgentforMac",
+    "type": "identity-security",
+    "badge": "New",
+    "image": "./assets/marketing/thm_MCK_Authpoint_MacOS.jpg",
+    "alt": "When it comes to MFA, you can't just protect Windows",
+    "title": "When it comes to MFA, you can't just protect Windows",
+    "description": "AuthPoint MFA offers comprehensive desktop sign-in authentication for Windows and Mac, ensuring a secure experience. The market for Mac clients is growing, with many service providers targeting small businesses and enterprise organizations." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/bym1lb6l/TheLastStopMCK",
+    "type": "msp-growth",
+    "badge": "New",
+    "image": "./assets/marketing/Last_Stop_96x96.jpg",
+    "alt": "MSPs: Your LAST STOP Against Cyber Threats",
+    "title": "MSPs: Your LAST STOP Against Cyber Threats",
+    "description": "Use these Last Stop marketing resources to show how you and your organization keep your clients safe from cyber threats with simple and efficient solutions." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/pk4tsfya/EUCybersecurityDirective-NIS2",
+    "type": "compliance",
+    "badge": "New",
+    "image": "./assets/marketing/MCK_Partner_Portal_NIS2.jpg",
+    "alt": "NIS 2 - EU Cybersecurity Directive",
+    "title": "NIS 2 - EU Cybersecurity Directive",
+    "description": "NIS 2 is a new cybersecurity regulation that will significantly impact European organizations. Understanding NIS 2 compliance requirements is crucial for businesses to avoid hefty fines and protect sensitive data." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/ponph6ku/UseThreatSync+NDRtoUnleashYourFirewalls",
+    "type": "network-security",
+    "badge": "New",
+    "image": "./assets/marketing/NDR_Rocket_LG.jpg",
+    "alt": "Unleash Your Firewalls",
+    "title": "Unleash Your Firewalls",
+    "description": "Cyber attacks are up across the board, with small and midsize businesses in the bullseye. WatchGuard ThreatSync+ NDR unleashes the true potential of firewalls, turning them into a powerful, full-fledged network detection and response system." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/n4exrkey/SellingtheValueofAuthPointSSO",
+    "type": "identity-security",
+    "badge": "New",
+    "image": "./assets/marketing/AuthPoint_SSO-Laptop_196.jpg",
+    "alt": "Selling the Value of AuthPoint Single Sign-On (SSO)",
+    "title": "Selling the Value of AuthPoint Single Sign-On (SSO)",
+    "description": "AuthPoint SSO is the key to unlocking secure and productive hybrid work. Help your customers mitigate credential-based attacks, streamline access to workforce applications, and boost productivity, all while growing your business!" 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/uv4uk7ys/PP-ThreatSyncXDRRealm",
+    "type": "xdr-mdr",
+    "badge": "New",
+    "image": "./assets/marketing/XDR_196.jpg",
+    "alt": "WatchGuard ThreatSync® Accessing the XDR Realm",
+    "title": "WatchGuard ThreatSync® Accessing the XDR Realm",
+    "description": "XDR is an essential tenet of modern cybersecurity that should be accessible to every business. As such, WatchGuard puts ThreatSync, our XDR solution, at your fingertips." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Zero_Trust_English",
+    "type": "msp-growth",
+    "badge": "New",
+    "image": "./assets/marketing/thm_portal_Zero_trust-(1).jpg",
+    "alt": "Expanding Your MSP Business with Zero Trust Adoption",
+    "title": "Expanding Your MSP Business with Zero Trust Adoption",
+    "description": "Learn All About Zero-Trust Security and how WatchGuard can help expand your business." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Sophos_Switch_English",
+    "type": "network-security",
+    "badge": "New",
+    "image": "./assets/marketing/thmb_PP_sophos.jpg",
+    "alt": "Sophos Switch Partner Marketing Kit 2024",
+    "title": "Sophos Switch Partner Marketing Kit 2024",
+    "description": "The final renewal deadline for many Sophos XG series customers is rapidly approaching in December 2025. This represents a significant opportunity to switch customers currently using Sophos appliances." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Cyber_Security_Power_Plays_English",
+    "type": "xdr-mdr",
+    "badge": "New",
+    "image": "./assets/marketing/thm_power_plays_partner.jpg",
+    "alt": "Cybersecurity Power Plays",
+    "title": "Cybersecurity Power Plays",
+    "description": "Educate your customers on powerful product pairings and strategic maneuvers that are only possible with a unified approach to security." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_MDR_English",
+    "type": "xdr-mdr",
+    "badge": "New",
+    "image": "./assets/marketing/thmb_MDR_196x196.jpg",
+    "alt": "WatchGuard MDR",
+    "title": "WatchGuard MDR",
+    "description": "WatchGuard MDR is a managed security service designed to provide businesses with 24/7 threat monitoring and rising demand for a 24/7 managed detection and response service to scale structured threats and operated by WatchGuard SOC team." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Better_Together_English",
+    "type": "network-security",
+    "badge": null,
+    "image": "./assets/marketing/Image_Glow_Endpoint_Network_MFA_Front.jpg",
+    "alt": "Better Together Means Increased Scalable Security",
+    "title": "Better Together Means Increased Scalable Security",
+    "description": "Providing the best security offerings starts with having managed solutions, reduce costs, improve user experience, and create more opportunities to win and keep customers." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_AuthPoint_MFA_English",
+    "type": "identity-security",
+    "badge": null,
+    "image": "./assets/marketing/thm_Auth_Power_of_Easy_MCK_NEW_196x196.jpg",
+    "alt": "AuthPoint MFA",
+    "title": "AuthPoint MFA",
+    "description": "Attention to MFA solutions Secure your customers' identities and assets with easy to use and cost-effective multi-factor authentication. We've compiled the key content that can help you promote the power of MFA." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Cyber_Insurance_English",
+    "type": "identity-security",
+    "badge": null,
+    "image": "./assets/marketing/Tmb_Image_MFA_Cyber_Insuarance_196x196.jpg",
+    "alt": "Cyber Insurance",
+    "title": "Cyber Insurance",
+    "description": "Insurance companies are now requiring multi-factor authentication as a security control for their customers. This is particularly advantageous if you're able to help customers. This marketing campaign provides a comprehensive overview." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_New_Customers_MSP_English",
+    "type": "msp-growth",
+    "badge": null,
+    "image": "./assets/marketing/thm_MCK_ICP.jpg",
+    "alt": "Recruiting New Customers for Your MSP Business",
+    "title": "Recruiting New Customers for Your MSP Business",
+    "description": "Target your audience with messages and solutions that show all the advantages of choosing you as their managed service provider. Create compelling marketing materials, email templates, user guides, and more to help you convert more prospects." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Escape_Ransomware_English",
+    "type": "endpoint-security",
+    "badge": null,
+    "image": "./assets/marketing/Ransomware_thmb.jpg",
+    "alt": "Help Your Customers to Escape the Ransomware Maze",
+    "title": "Help Your Customers to Escape the Ransomware Maze",
+    "description": "Ransomware attacks are increasing and more sophisticated than ever. Secure your customers before the next ransomware attack targets them." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Total_Identity_Security_English",
+    "type": "identity-security",
+    "badge": null,
+    "image": "./assets/marketing/Thm_Keep_Identity_Real.jpg",
+    "alt": "AuthPoint Total Identity Security",
+    "title": "AuthPoint Total Identity Security",
+    "description": "Total Identity Security enters the cybersecurity market to help organizations manage their growing challenges with passwords." 
+  },
+  {
+    "href": "https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_WISE_English",
+    "type": "programs-education",
+    "badge": null,
+    "image": "./assets/marketing/thmb_Partner_Portal_WISE.jpg",
+    "alt": "WatchGuard WISE Program",
+    "title": "WatchGuard WISE Program",
+    "description": "WatchGuard Initiative for Security Education is a program designed to provide the products, services, and continued education needed to better understand our services. WatchGuard Firebox, AuthPoint and Secure Wi-Fi." 
+  }
+]

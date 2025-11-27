@@ -14,15 +14,18 @@
 
     function initializeFilters(){
         var filterBtns = document.querySelectorAll('.filter-option-btn');
-        var campaignCards = document.querySelectorAll('.campaign-card');
 
         // Exit if no filter elements found on this page
-        if(filterBtns.length === 0 || campaignCards.length === 0) {
+        if(filterBtns.length === 0) {
             return;
         }
 
         // Function to apply filters
         function applyFilters() {
+            // Re-query campaign cards to support dynamically rendered content
+            var campaignCards = document.querySelectorAll('.campaign-card');
+            if(campaignCards.length === 0) return;
+
             // Get all active filters
             var activeFilters = [];
             filterBtns.forEach(function(btn){
