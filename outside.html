@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selling Endpoint Security | WatchGuard Partner Portal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="css/common.css">
+
+    <!-- Page-specific styles -->
+    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 4rem 2rem;
+        }
+
+        .hero-text h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text .subtitle {
+            color: #e0e0e0;
+            font-size: 1.286rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--watchguard-red);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 0.286rem;
+            font-size: 0.857rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Main Container */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+            padding: 4rem 0;
+        }
+
+        /* Value Proposition Cards */
+        .value-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--watchguard-red);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .value-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .value-card-icon {
+            font-size: 2.5rem;
+            color: var(--watchguard-red);
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.286rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .value-card p {
+            color: var(--medium-gray);
+            line-height: 1.6;
+            font-size: 0.929rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--watchguard-red);
+        }
+
+        .content-section h3 {
+            font-size: 1.429rem;
+            color: var(--dark-gray);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: var(--medium-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .content-section ul,
+        .content-section ol {
+            color: var(--medium-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .content-section li strong {
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--watchguard-red);
+        }
+
+        /* Product Cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            border-left: 4px solid var(--watchguard-red);
+            padding: 1.5rem;
+            border-radius: 0.286rem;
+        }
+
+        .product-card h4 {
+            color: var(--dark-gray);
+            font-size: 1.143rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-card p {
+            color: var(--medium-gray);
+            font-size: 0.929rem;
+            line-height: 1.6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .sidebar-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-card h3 {
+            font-size: 1.286rem;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-card h3 i {
+            color: var(--watchguard-red);
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 0.286rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .resource-link:hover {
+            background: var(--white);
+            border-color: var(--watchguard-red);
+            transform: translateX(4px);
+        }
+
+        .resource-link i {
+            font-size: 1.286rem;
+            color: var(--watchguard-red);
+        }
+
+        .resource-link-text {
+            flex: 1;
+        }
+
+        .resource-link-title {
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 0.929rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-link-desc {
+            color: var(--medium-gray);
+            font-size: 0.786rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--watchguard-red) 0%, #b91c1c 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .cta-section-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            font-size: 2.286rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-section h2::after {
+            display: none;
+        }
+
+        .cta-section p {
+            color: var(--white);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.143rem;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--white);
+            color: var(--watchguard-red);
+            border: 2px solid var(--white);
+            border-radius: 0.286rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-cta:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 0.5rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--watchguard-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--medium-gray);
+            font-size: 0.929rem;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 3rem 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1rem;
+            }
+
+            .value-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (loaded dynamically) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">Go-To-Market Solution</div>
+                <h1>Selling Endpoint Security</h1>
+                <p class="subtitle">AI-Driven and Automated Endpoint Security from a Single Pane of Glass</p>
+                <p class="subtitle">The threat landscape is constant and your clients are the target. Empower them with next-generation endpoint security that combines EPP, EDR, machine learning, and threat hunting services.</p>
+            </div>
+            <div class="hero-image">
+                <img src="/servlet/rtaImage?eid=a8k0H000000XaUA&feoid=00N2A00000Dg9sY&refid=0EM0H000002AV9h" alt="Endpoint Security">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="content-grid">
+            <!-- Main Content Column -->
+            <main>
+                <!-- Value Proposition Cards -->
+                <div class="value-cards">
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Advanced Protection</h3>
+                        <p>Automate prevention, detection, and response to advanced threats, zero-day malware, ransomware, and phishing attacks.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>Cloud-Native</h3>
+                        <p>No on-site servers required. Manage everything from a clean, intuitive administrative console in WatchGuard Cloud.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Industry Validated</h3>
+                        <p>Validated by AV-Comparatives Business Test 2020, recognizing major advantages in endpoint security.</p>
+                    </div>
+                </div>
+
+                <!-- Key Benefits Section -->
+                <section class="content-section">
+                    <h2>5 Ways to Make a Difference with WatchGuard Endpoint Security</h2>
+                    <p>WatchGuard Endpoint Security is packed with advanced technologies and services purpose-built so you can deliver enterprise-grade security to your clients. Below are just some of the benefits that can improve your backend operations, increase the value of your security services, and help you close more deals.</p>
+
+                    <ol>
+                        <li><strong>Advanced Endpoint Protection Detection and Response (EPDR):</strong> Automates the prevention, detection, containment, and response to any advanced threat, zero day malware, ransomware, phishing, in-memory exploits, and malwareless attacks. WatchGuard Advanced EPDR adds hunting and response tools, enabling MSSPs and SOC teams cost-effective and easy-to-master managed security services that reduce threat dwell time at their customers' endpoints.</li>
+
+                        <li><strong>Easy to Set Up and Doesn't Require On-Site Server:</strong> Access a clean and useful administrative console that shows you attack execution graphs, revealing how the threat actor was able to enter the endpoint. This information can help you predict future attacks and apply automated containment and response measures.</li>
+
+                        <li><strong>Validated by AV-Comparatives Business Test 2020:</strong> WatchGuard advanced endpoint security solutions have been validated by Independent Tests of Anti-Virus Software, AV Comparatives, recognizing major advantages.</li>
+
+                        <li><strong>Zero-Trust Application Service:</strong> Classifies as either malware or as trusted, prior to letting only the trusted execute on each endpoint. Since it is a fully automated service, it does not require any input or decision from the end user or from your security or IT teams.</li>
+
+                        <li><strong>Threat Hunting Service:</strong> Provides traceability of each action; actionable visibility of the attacker and their activity, facilitating forensic investigation of applications, users, and machines.</li>
+                    </ol>
+                </section>
+
+                <!-- MSP Challenges Section -->
+                <section class="content-section">
+                    <h2>Solving Key MSP Challenges</h2>
+                    <p>Having endpoint solutions in WatchGuard Cloud simplifies the way you manage security products allowing you to scale and expand your services, while giving your end users peace of mind by being protected from an evolving threat landscape.</p>
+
+                    <ul class="feature-list">
+                        <li><strong>Effective Simplicity:</strong> Simple, effective security that is easy to learn and use, empowers skill-and-time-strapped teams to do more.</li>
+
+                        <li><strong>Improved Management:</strong> Tools that make managing a distributed network easier, including remote employees.</li>
+
+                        <li><strong>Reduced TCO:</strong> Solutions that do not require new IT infrastructures on the company's premises for management and maintenance - reducing the solution's TCO.</li>
+
+                        <li><strong>Intelligent Technology:</strong> The ability to stop advanced threats and return systems to good order faster when something goes wrong.</li>
+
+                        <li><strong>Adaptive Approach:</strong> Security that integrates with your existing RMM and PSA tools allows for more rapid response to support requests.</li>
+                    </ul>
+
+                    <h3>Flexible Licensing Options</h3>
+                    <p>Choose flexible options to add endpoint products to your solution stack based on your business model:</p>
+                    <ul class="feature-list">
+                        <li>Prepaid points</li>
+                        <li>Term licenses</li>
+                        <li>Usage-based subscription</li>
+                    </ul>
+                </section>
+
+                <!-- Products Section -->
+                <section class="content-section">
+                    <h2>Available Endpoint Security Products</h2>
+
+                    <h3>Endpoint Solutions Available in WatchGuard Cloud</h3>
+
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <h4>WatchGuard EPDR</h4>
+                            <p>Combines the widest range of protection (EPP) technologies with EDR capabilities for computers, laptops and servers that detects what traditional solutions cannot even see.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>WatchGuard EPP</h4>
+                            <p>An effective Cloud-native security solution that centralizes next-generation antivirus for all your Windows, macOS and Linux desktops, laptops, and servers.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>WatchGuard EDR</h4>
+                            <p>Complements other EPP solutions by adding a full stack of EDR capabilities to automate the detection, containment, and response to any advanced threat.</p>
+                        </div>
+                    </div>
+
+                    <h3>Endpoint Modules Available in WatchGuard Cloud</h3>
+
+                    <ul class="feature-list">
+                        <li><strong>WatchGuard Patch Management:</strong> Manage operating system and third-party application vulnerabilities on your workstations and servers. <em>Available in WatchGuard EPDR, WatchGuard EDR, and WatchGuard EPP.</em></li>
+
+                        <li><strong>WatchGuard Full Encryption:</strong> Encrypt and decrypt disks and USB drives (no decryption) centrally without impact to end users. <em>Available in WatchGuard EPDR, WatchGuard EDR, and WatchGuard EPP.</em></li>
+
+                        <li><strong>WatchGuard Advanced Reporting Tool (ART):</strong> Generate security intelligence and IT insights to pinpoint attacks, unusual behavior, and internal misuse. Available in WatchGuard EPDR and WatchGuard EDR.</li>
+
+                        <li><strong>WatchGuard Data Control*:</strong> Discover and monitor personal and sensitive data across endpoints and servers to comply with data protection regulations. Available in WatchGuard EPDR and WatchGuard EDR.</li>
+                    </ul>
+
+                    <p style="font-size: 0.857rem; font-style: italic;">*WatchGuard Data Control is available in these countries: Spain, Germany, UK, Sweden, France, Italy, Portugal, Holland, Finland, Denmark, Switzerland, Norway, Austria, Belgium, Hungary and Ireland.</p>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="cta-section">
+                    <div class="cta-section-content">
+                        <h2>Start Selling WatchGuard Endpoint Security Today</h2>
+                        <p>Next-generation endpoint security is here now, ready to protect your clients' businesses before an incident occurs. Get certified and start incorporating this essential solution into your service offering.</p>
+                        <a href="https://learn.watchguard.com/" class="btn-cta">Start Your Sales Certification Training</a>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Resources Card -->
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-folder-open"></i> Resources</h3>
+
+                    <a href="https://watchguard.widencollective.com/portals/gaqtm9v8/WatchGuardEndpointSecurity" target="_blank" class="resource-link">
+                        <i class="fas fa-box"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Product Pack</div>
+                            <div class="resource-link-desc">Complete endpoint security materials</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widen.net/s/t2wdddsplf/endpoint-rfps-template" target="_blank" class="resource-link">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">RFP Template</div>
+                            <div class="resource-link-desc">Respond to customer requests</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Quick Links Card -->
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-link"></i> Quick Links</h3>
+
+                    <a href="https://learn.watchguard.com/" target="_blank" class="resource-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Training Portal</div>
+                            <div class="resource-link-desc">Get certified on endpoint security</div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="resource-link">
+                        <i class="fas fa-headset"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Contact Support</div>
+                            <div class="resource-link-desc">Get help from our team</div>
+                        </div>
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer (loaded dynamically) -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Common JavaScript -->
+    <script src="js/common.js"></script>
+</body>
+</html>
