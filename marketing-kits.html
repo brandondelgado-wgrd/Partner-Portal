@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Campaign Kits | WatchGuard Partner Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        /* Page-specific styles for Marketing Kits */
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #b91c1c 0%, var(--watchguard-red) 100%);
+            padding: 4.286rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 2.857rem;
+            font-weight: 300;
+            letter-spacing: 0.05rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .intro-section h2 {
+            font-size: 1.714rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .intro-section p {
+            color: var(--medium-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Filters */
+        .filters {
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .filter-option-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--watchguard-red);
+            background: var(--white);
+            color: var(--watchguard-red);
+            border-radius: 0.9rem;
+            font-size: 0.857rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+            user-select: none;
+        }
+
+        .filter-option-btn:hover {
+            background: rgba(232, 20, 16, 0.05);
+        }
+
+        .filter-option-btn.active {
+            background: var(--watchguard-red);
+            color: var(--white);
+        }
+
+        .filter-options input[type="checkbox"] {
+            display: none;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-top: 0;
+        }
+
+        .btn-filter {
+            padding: 0.5rem 1rem;
+            border-radius: 0.286rem;
+            border: none;
+            background: transparent;
+            color: var(--watchguard-red);
+            cursor: pointer;
+            font-size: 0.857rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: underline;
+        }
+
+        .btn-filter:hover {
+            color: var(--dark-gray);
+        }
+
+        /* Campaign Grid */
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .campaign-card {
+            background: var(--white);
+            border: 1px solid var(--light-gray);
+            border-radius: 0.286rem;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .campaign-card:hover {
+            box-shadow: 0 0.571rem 1.429rem rgba(0, 0, 0, 0.1);
+            transform: translateY(-0.286rem);
+            text-decoration: none;
+        }
+
+        .campaign-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .campaign-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .campaign-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--watchguard-red);
+            color: var(--white);
+            padding: 0.357rem 0.714rem;
+            border-radius: 0.286rem;
+            font-size: 0.714rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transform: rotate(15deg);
+        }
+
+        .campaign-content {
+            padding: 1.5rem;
+        }
+
+        .campaign-title {
+            font-size: 1.143rem;
+            color: var(--watchguard-red);
+            margin-bottom: 0.714rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .campaign-description {
+            color: var(--medium-gray);
+            font-size: 0.857rem;
+            line-height: 1.6;
+            text-decoration: none;
+        }
+
+        .campaign-card .campaign-title,
+        .campaign-card .campaign-description {
+            text-decoration: none !important;
+        }
+
+        .campaign-card.hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .campaigns-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .campaigns-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (loaded dynamically) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Marketing Campaign Kits</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="intro-section">
+            <h2>Resources for Effective Lead Generation</h2>
+            <p>Create effective marketing programs with these marketing campaign assets. Utilize this content to generate customer interest, boost product awareness, and increase subscription revenue. These marketing campaigns come complete with easy-to-distribute resources, including advertisements, ebooks, infographics, email templates, case studies, and more.</p>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters">
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h3>Filter by Type</h3>
+                </div>
+                <div class="filter-options">
+                    <button class="filter-option-btn" data-filter="network-security">Network Security</button>
+                    <button class="filter-option-btn" data-filter="identity-security">Identity Security</button>
+                    <button class="filter-option-btn" data-filter="endpoint-security">Endpoint Security</button>
+                    <button class="filter-option-btn" data-filter="cloud-remote">Cloud & Remote Access</button>
+                    <button class="filter-option-btn" data-filter="xdr-mdr">XDR/MDR</button>
+                    <button class="filter-option-btn" data-filter="msp-growth">MSP Business Growth</button>
+                    <button class="filter-option-btn" data-filter="compliance">Compliance & Regulation</button>
+                    <button class="filter-option-btn" data-filter="programs-education">Programs & Education</button>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-filter" id="clear-filters">Clear Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaigns Grid -->
+        <div class="campaigns-grid">
+            <!-- Campaign Card 1 -->
+            <a href="https://watchguard.widencollective.com/portals/uhnvwhmo/FireCloudTotalAccess" target="_blank" class="campaign-card" data-type="cloud-remote">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thms_FireCloud_Total_Access.jpg" alt="FireCloud Marketing Campaign Kit">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">FireCloud Marketing Campaign Kit</h3>
+                    <p class="campaign-description">FireCloud Total Access isn't just another product launch — it's your opportunity to win recurring, high-margin business by solving one of today's biggest pain points: secure remote access.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 2 -->
+            <a href="https://watchguard.widencollective.com/portals/x40ire6g/FireboxRackmountFirewallsMCK" target="_blank" class="campaign-card" data-type="network-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thm_NEW_Rackmount_MCK.jpg" alt="Next-Gen Firebox Rackmount">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Next-Gen Firebox Rackmount</h3>
+                    <p class="campaign-description">Everything you need to generate awareness, drive demand, and boost sales with WatchGuard's new Firebox rackmount appliances.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 3 -->
+            <a href="https://watchguard.widencollective.com/portals/lvzseyew/FireboxTabletopFirewalls" target="_blank" class="campaign-card" data-type="network-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thmb_PP_Tabletop_2025.jpg" alt="Firebox Tabletop Campaign Kit">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Firebox Tabletop Campaign Kit</h3>
+                    <p class="campaign-description">Everything you need to generate awareness, drive demand, and boost sales with WatchGuard's next-gen tabletop appliances. This kit features ready-to-use marketing assets, messaging tools, and promotional resources.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 4 -->
+            <a href="https://watchguard.widencollective.com/portals/4b78kcr2/PP_MCK_Real_Security_Real_World" target="_blank" class="campaign-card" data-type="programs-education">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thm_Widen_PP_RSWR (1).jpg" alt="Real Security for the Real World">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Real Security for the Real World</h3>
+                    <p class="campaign-description">For three decades, WatchGuard has made advanced security solutions a reality for every organization, enabling them with Real Security for the Real World. Use this marketing kit to promote your brand with real security.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 5 -->
+            <a href="https://watchguard.widencollective.com/portals/ah99wlod/MakingtheSwitchtoaNewFirebox" target="_blank" class="campaign-card" data-type="network-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/MCK_Portal_FB_EOL.jpg" alt="Making the Switch to a New Firebox">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Making the Switch to a New Firebox</h3>
+                    <p class="campaign-description">Upgrading to a new Firebox firewall enhances network security by providing advanced threat protection, increased performance, and scalability to accommodate future growth.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 6 -->
+            <a href="https://watchguard.widencollective.com/portals/z0bsj1lo/MFAAgentforMac" target="_blank" class="campaign-card" data-type="identity-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thm_MCK_Authpoint_MacOS.jpg" alt="When it comes to MFA, you can't just protect Windows">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">When it comes to MFA, you can't just protect Windows</h3>
+                    <p class="campaign-description">AuthPoint MFA offers comprehensive desktop sign-in authentication for Windows and Mac, ensuring a secure experience. The market for Mac clients is growing, with many service providers targeting small businesses and enterprise organizations.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 7 -->
+            <a href="https://watchguard.widencollective.com/portals/bym1lb6l/TheLastStopMCK" target="_blank" class="campaign-card" data-type="msp-growth">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/Last_Stop_96x96.jpg" alt="MSPs: Your LAST STOP Against Cyber Threats">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">MSPs: Your LAST STOP Against Cyber Threats</h3>
+                    <p class="campaign-description">Use these Last Stop marketing resources to show how you and your organization keep your clients safe from cyber threats with simple and efficient solutions.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 8 -->
+            <a href="https://watchguard.widencollective.com/portals/pk4tsfya/EUCybersecurityDirective-NIS2" target="_blank" class="campaign-card" data-type="compliance">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/MCK_Partner_Portal_NIS2.jpg" alt="NIS 2 - EU Cybersecurity Directive">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">NIS 2 - EU Cybersecurity Directive</h3>
+                    <p class="campaign-description">NIS 2 is a new cybersecurity regulation that will significantly impact European organizations. Understanding NIS 2 compliance requirements is crucial for businesses to avoid hefty fines and protect sensitive data.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 9 -->
+            <a href="https://watchguard.widencollective.com/portals/ponph6ku/UseThreatSync+NDRtoUnleashYourFirewalls" target="_blank" class="campaign-card" data-type="network-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/NDR_Rocket_LG.jpg" alt="Unleash Your Firewalls">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Unleash Your Firewalls</h3>
+                    <p class="campaign-description">Cyber attacks are up across the board, with small and midsize businesses in the bullseye. WatchGuard ThreatSync+ NDR unleashes the true potential of firewalls, turning them into a powerful, full-fledged network detection and response system.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 10 -->
+            <a href="https://watchguard.widencollective.com/portals/n4exrkey/SellingtheValueofAuthPointSSO" target="_blank" class="campaign-card" data-type="identity-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/AuthPoint_SSO-Laptop_196.jpg" alt="Selling the Value of AuthPoint Single Sign-On (SSO)">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Selling the Value of AuthPoint Single Sign-On (SSO)</h3>
+                    <p class="campaign-description">AuthPoint SSO is the key to unlocking secure and productive hybrid work. Help your customers mitigate credential-based attacks, streamline access to workforce applications, and boost productivity, all while growing your business!</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 11 -->
+            <a href="https://watchguard.widencollective.com/portals/uv4uk7ys/PP-ThreatSyncXDRRealm" target="_blank" class="campaign-card" data-type="xdr-mdr">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/XDR_196.jpg" alt="WatchGuard ThreatSync® Accessing the XDR Realm">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">WatchGuard ThreatSync® Accessing the XDR Realm</h3>
+                    <p class="campaign-description">XDR is an essential tenet of modern cybersecurity that should be accessible to every business. As such, WatchGuard puts ThreatSync, our XDR solution, at your fingertips.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 12 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Zero_Trust_English" target="_blank" class="campaign-card" data-type="msp-growth">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thm_portal_Zero_trust-(1).jpg" alt="Expanding Your MSP Business with Zero Trust Adoption">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Expanding Your MSP Business with Zero Trust Adoption</h3>
+                    <p class="campaign-description">Learn All About Zero-Trust Security and how WatchGuard can help expand your business.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 13 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Sophos_Switch_English" target="_blank" class="campaign-card" data-type="network-security">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thmb_PP_sophos.jpg" alt="Sophos Switch Partner Marketing Kit 2024">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Sophos Switch Partner Marketing Kit 2024</h3>
+                    <p class="campaign-description">The final renewal deadline for many Sophos XG series customers is rapidly approaching in December 2025. This represents a significant opportunity to switch customers currently using Sophos appliances.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 14 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Cyber_Security_Power_Plays_English" target="_blank" class="campaign-card" data-type="xdr-mdr">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thm_power_plays_partner.jpg" alt="Cybersecurity Power Plays">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Cybersecurity Power Plays</h3>
+                    <p class="campaign-description">Educate your customers on powerful product pairings and strategic maneuvers that are only possible with a unified approach to security.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 15 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_MDR_English" target="_blank" class="campaign-card" data-type="xdr-mdr">
+                <div class="campaign-image">
+                    <div class="campaign-badge">New</div>
+                    <img src="./assets/marketing/thmb_MDR_196x196.jpg" alt="WatchGuard MDR">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">WatchGuard MDR</h3>
+                    <p class="campaign-description">WatchGuard MDR is a managed security service designed to provide businesses with 24/7 threat monitoring and rising demand for a 24/7 managed detection and response service to scale structured threats and operated by WatchGuard SOC team.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 16 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Better_Together_English" target="_blank" class="campaign-card" data-type="network-security">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/Image_Glow_Endpoint_Network_MFA_Front.jpg" alt="Better Together Means Increased Scalable Security">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Better Together Means Increased Scalable Security</h3>
+                    <p class="campaign-description">Providing the best security offerings starts with having managed solutions, reduce costs, improve user experience, and create more opportunities to win and keep customers.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 17 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_AuthPoint_MFA_English" target="_blank" class="campaign-card" data-type="identity-security">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/thm_Auth_Power_of_Easy_MCK_NEW_196x196.jpg" alt="AuthPoint MFA">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">AuthPoint MFA</h3>
+                    <p class="campaign-description">Attention to MFA solutions Secure your customers' identities and assets with easy to use and cost-effective multi-factor authentication. We've compiled the key content that can help you promote the power of MFA.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 18 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Cyber_Insurance_English" target="_blank" class="campaign-card" data-type="identity-security">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/Tmb_Image_MFA_Cyber_Insuarance_196x196.jpg" alt="Cyber Insurance">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Cyber Insurance</h3>
+                    <p class="campaign-description">Insurance companies are now requiring multi-factor authentication as a security control for their customers. This is particularly advantageous if you're able to help customers. This marketing campaign provides a comprehensive overview.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 19 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_New_Customers_MSP_English" target="_blank" class="campaign-card" data-type="msp-growth">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/thm_MCK_ICP.jpg" alt="Recruiting New Customers for Your MSP Business">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Recruiting New Customers for Your MSP Business</h3>
+                    <p class="campaign-description">Target your audience with messages and solutions that show all the advantages of choosing you as their managed service provider. Create compelling marketing materials, email templates, user guides, and more to help you convert more prospects.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 20 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Escape_Ransomware_English" target="_blank" class="campaign-card" data-type="endpoint-security">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/Ransomware_thmb.jpg" alt="Help Your Customers to Escape the Ransomware Maze">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">Help Your Customers to Escape the Ransomware Maze</h3>
+                    <p class="campaign-description">Ransomware attacks are increasing and more sophisticated than ever. Secure your customers before the next ransomware attack targets them.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 21 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_Total_Identity_Security_English" target="_blank" class="campaign-card" data-type="identity-security">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/Thm_Keep_Identity_Real.jpg" alt="AuthPoint Total Identity Security">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">AuthPoint Total Identity Security</h3>
+                    <p class="campaign-description">Total Identity Security enters the cybersecurity market to help organizations manage their growing challenges with passwords.</p>
+                </div>
+            </a>
+
+            <!-- Campaign Card 22 -->
+            <a href="https://watchguard.widencollective.com/portals/vpxs0hbz/MCK_WISE_English" target="_blank" class="campaign-card" data-type="programs-education">
+                <div class="campaign-image">
+                    <img src="./assets/marketing/thmb_Partner_Portal_WISE.jpg" alt="WatchGuard WISE Program">
+                </div>
+                <div class="campaign-content">
+                    <h3 class="campaign-title">WatchGuard WISE Program</h3>
+                    <p class="campaign-description">WatchGuard Initiative for Security Education is a program designed to provide the products, services, and continued education needed to better understand our services. WatchGuard Firebox, AuthPoint and Secure Wi-Fi.</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer (loaded dynamically) -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Common JavaScript -->
+    <script src="js/common.js"></script>
+    
+    <!-- Filter functionality -->
+    <script src="js/filters.js"></script>
+</body>
+</html>
