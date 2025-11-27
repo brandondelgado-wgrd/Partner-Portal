@@ -187,7 +187,6 @@ function renderSpecializationsBadges(specializations) {
 
         badgeItem.innerHTML = `
             <img src="assets/${spec.icon}@2x.png" alt="${spec.name}" class="spec-badge">
-            <div class="badge-item-name">${spec.name}</div>
             <div class="cert-list">
                 <div class="cert-item">
                     <span class="cert-label">Sales Cert</span>
