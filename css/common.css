@@ -134,10 +134,22 @@ header {
 
 .multi-nav .submenu-group strong {
     display: block;
-    font-weight: 700;
-    color: var(--dark-gray);
+    font-weight: 600;
+    color: var(--medium-gray);
     margin-bottom: 0.35rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    padding: 0.35rem 0.5rem;
+    cursor: default;
+    background: rgba(127, 140, 141, 0.05);
+    border-radius: 3px;
+}
+
+.multi-nav .submenu-group strong::before {
+    content: "- ";
+    margin-right: 0.25rem;
+    opacity: 0.6;
 }
 
 .multi-nav .submenu li {
