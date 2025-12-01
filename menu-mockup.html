@@ -323,6 +323,25 @@
                 </div>
             </div>
 
+            <!-- Promo (under Learn section - not visible, used for navigation) -->
+            <div class="level-3-menu" id="learn-promo-menu">
+                <div class="level-3-header">Promo</div>
+                <div class="level-3-item">
+                    <a href="#erate">eRate Program (US)</a>
+                </div>
+                <div class="level-3-item">
+                    <a href="#wise">WISE Program</a>
+                </div>
+            </div>
+
+            <!-- Platform (under Learn section - not visible, used for navigation) -->
+            <div class="level-3-menu" id="learn-platform-menu">
+                <div class="level-3-header">Platform</div>
+                <div class="level-3-item">
+                    <a href="#tech-partners">Technology Partners</a>
+                </div>
+            </div>
+
             <!-- Sales Tools -->
             <div class="level-3-menu" id="sales-tools-menu">
                 <div class="level-3-header">Sales Tools</div>
@@ -470,8 +489,14 @@
                 item.classList.add('active');
                 currentLevel2 = category;
 
+                // Determine which level 3 menu to show based on section and category
+                let menuId = `${category}-menu`;
+                if (currentLevel1 === 'learn' && (category === 'promo' || category === 'platform')) {
+                    menuId = `learn-${category}-menu`;
+                }
+
                 // Show corresponding level 3 menu
-                const level3Menu = document.getElementById(`${category}-menu`);
+                const level3Menu = document.getElementById(menuId);
                 if (level3Menu) {
                     level3Menu.classList.add('active');
                 }
