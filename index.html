@@ -777,6 +777,57 @@
     <!-- Footer (loaded dynamically) -->
     <div id="footer-placeholder"></div>
 
+    <!-- Modal de Certificações -->
+    <div id="certificationsModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle">Sales Trained Individuals - Network Security Details</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-tabs">
+                <button class="modal-tab active" data-tab="active">Active</button>
+                <button class="modal-tab" data-tab="expired">Expired</button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-tab-content active" id="tab-active">
+                    <table class="certifications-table">
+                        <thead>
+                            <tr>
+                                <th>Contact</th>
+                                <th>Accomplishment</th>
+                                <th>Source</th>
+                                <th>Date Taken</th>
+                                <th>Expiration Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="active-certifications-body">
+                            <!-- Será preenchido dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-tab-content" id="tab-expired">
+                    <table class="certifications-table">
+                        <thead>
+                            <tr>
+                                <th>Contact</th>
+                                <th>Accomplishment</th>
+                                <th>Source</th>
+                                <th>Date Taken</th>
+                                <th>Expiration Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expired-certifications-body">
+                            <!-- Será preenchido dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-close">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Common JavaScript -->
     <script src="js/common.js"></script>
     <script src="js/partnership-dashboard.js"></script>

@@ -26,28 +26,103 @@ const partnerData = {
             icon: "Network Security",
             salesCert: true,
             techCert: true,
-            nfr: true
+            nfr: true,
+            certifications: {
+                active: [
+                    {
+                        contact: "Bill Munroe",
+                        accomplishment: "Booster: FireCloud Total Access - Product Introduction",
+                        source: "Course",
+                        dateTaken: "November 7, 2025",
+                        expirationDate: "November 7, 2026"
+                    },
+                    {
+                        contact: "Leo Zhou",
+                        accomplishment: "Booster: FireCloud Total Access - Product Introduction",
+                        source: "Course",
+                        dateTaken: "November 5, 2025",
+                        expirationDate: "November 5, 2026"
+                    },
+                    {
+                        contact: "Mary Hagerson",
+                        accomplishment: "Network Security Sales Certification",
+                        source: "Course",
+                        dateTaken: "July 2, 2025",
+                        expirationDate: "July 2, 2026"
+                    },
+                    {
+                        contact: "Lisen Rosén",
+                        accomplishment: "Booster: FireCloud Internet Access Go To Market",
+                        source: "Course",
+                        dateTaken: "March 27, 2025",
+                        expirationDate: "March 27, 2026"
+                    },
+                    {
+                        contact: "Leo Zhou",
+                        accomplishment: "Network Security Sales Certification",
+                        source: "Course",
+                        dateTaken: "December 29, 2024",
+                        expirationDate: "December 29, 2025"
+                    }
+                ],
+                expired: [
+                    {
+                        contact: "John Smith",
+                        accomplishment: "Network Security Sales Certification",
+                        source: "Course",
+                        dateTaken: "January 15, 2023",
+                        expirationDate: "January 15, 2024"
+                    },
+                    {
+                        contact: "Jane Doe",
+                        accomplishment: "Booster: FireCloud Total Access - Product Introduction",
+                        source: "Course",
+                        dateTaken: "March 10, 2023",
+                        expirationDate: "March 10, 2024"
+                    }
+                ]
+            }
         },
         {
             name: "Secure Wi-Fi",
             icon: "Secure Wi-fi",
             salesCert: false,
             techCert: true,
-            nfr: false
+            nfr: false,
+            certifications: {
+                active: [
+                    {
+                        contact: "Sarah Johnson",
+                        accomplishment: "Secure Wi-Fi Technical Certification",
+                        source: "Course",
+                        dateTaken: "August 15, 2025",
+                        expirationDate: "August 15, 2026"
+                    }
+                ],
+                expired: []
+            }
         },
         {
             name: "Multi-Factor Authentication",
             icon: "MFA",
             salesCert: false,
             techCert: false,
-            nfr: true
+            nfr: true,
+            certifications: {
+                active: [],
+                expired: []
+            }
         },
         {
             name: "Endpoint Security",
             icon: "Endpoint Security",
             salesCert: false,
             techCert: false,
-            nfr: false
+            nfr: false,
+            certifications: {
+                active: [],
+                expired: []
+            }
         }
     ]
 };
@@ -181,22 +256,28 @@ function renderSpecializationsBadges(specializations) {
     const container = document.getElementById('specializationsBadges');
     container.innerHTML = '';
 
-    specializations.forEach(spec => {
+    specializations.forEach((spec, index) => {
         const badgeItem = document.createElement('div');
         badgeItem.className = 'badge-item';
 
         badgeItem.innerHTML = `
             <img src="assets/${spec.icon}@2x.png" alt="${spec.name}" class="spec-badge">
             <div class="cert-list">
-                <div class="cert-item">
+                <div class="cert-item clickable-cert" 
+                     data-spec-index="${index}" 
+                     data-cert-type="salesCert">
                     <span class="cert-label">Sales Cert</span>
                     <span class="cert-status icon-${spec.salesCert ? 'check' : 'x'}">${spec.salesCert ? '✓' : '✗'}</span>
                 </div>
-                <div class="cert-item">
+                <div class="cert-item clickable-cert" 
+                     data-spec-index="${index}" 
+                     data-cert-type="techCert">
                     <span class="cert-label">Tech Cert</span>
                     <span class="cert-status icon-${spec.techCert ? 'check' : 'x'}">${spec.techCert ? '✓' : '✗'}</span>
                 </div>
-                <div class="cert-item">
+                <div class="cert-item clickable-cert" 
+                     data-spec-index="${index}" 
+                     data-cert-type="nfr">
                     <span class="cert-label">NFR</span>
                     <span class="cert-status icon-${spec.nfr ? 'check' : 'x'}">${spec.nfr ? '✓' : '✗'}</span>
                 </div>
@@ -204,6 +285,140 @@ function renderSpecializationsBadges(specializations) {
         `;
 
         container.appendChild(badgeItem);
+    });
+
+    // Adicionar event listeners aos ícones clicáveis
+    document.querySelectorAll('.clickable-cert').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const specIndex = parseInt(this.getAttribute('data-spec-index'));
+            const certType = this.getAttribute('data-cert-type');
+            openCertificationsModal(specIndex, certType);
+        });
+    });
+}
+
+// Função para abrir o modal de certificações
+function openCertificationsModal(specIndex, certType) {
+    const spec = partnerData.specializations[specIndex];
+    const modal = document.getElementById('certificationsModal');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    if (!modal || !modalTitle) {
+        console.error('Modal elements not found');
+        return;
+    }
+    
+    // Determinar o título baseado no tipo de certificação
+    let certTypeName = '';
+    if (certType === 'salesCert') certTypeName = 'Sales Trained Individuals';
+    else if (certType === 'techCert') certTypeName = 'Technical Certified Individuals';
+    else if (certType === 'nfr') certTypeName = 'NFR Qualified Individuals';
+    
+    modalTitle.textContent = `${certTypeName} - ${spec.name} Details`;
+    
+    // Verificar se há certificações para mostrar
+    const hasActive = spec.certifications?.active && spec.certifications.active.length > 0;
+    const hasExpired = spec.certifications?.expired && spec.certifications.expired.length > 0;
+    
+    // Renderizar certificações ativas e expiradas
+    renderCertificationsTable('active', spec.certifications?.active || []);
+    renderCertificationsTable('expired', spec.certifications?.expired || []);
+    
+    // Mostrar modal mesmo se não houver certificações (mostra mensagem "No certifications found")
+    modal.classList.add('active');
+    
+    // Resetar para aba Active (ou Expired se não houver ativas)
+    if (hasActive) {
+        switchTab('active');
+    } else if (hasExpired) {
+        switchTab('expired');
+    } else {
+        switchTab('active');
+    }
+}
+
+// Função para renderizar a tabela de certificações
+function renderCertificationsTable(tabType, certifications) {
+    const tbody = document.getElementById(`${tabType}-certifications-body`);
+    tbody.innerHTML = '';
+    
+    if (certifications.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 2rem; color: #999;">No certifications found</td></tr>';
+        return;
+    }
+    
+    certifications.forEach(cert => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${cert.contact}</td>
+            <td>${cert.accomplishment}</td>
+            <td>${cert.source}</td>
+            <td>${cert.dateTaken}</td>
+            <td>${cert.expirationDate}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Função para alternar entre abas
+function switchTab(tabName) {
+    // Atualizar botões de aba
+    document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.getAttribute('data-tab') === tabName) {
+            tab.classList.add('active');
+        }
+    });
+    
+    // Atualizar conteúdo das abas
+    document.querySelectorAll('.modal-tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`tab-${tabName}`).classList.add('active');
+}
+
+// Função para fechar o modal
+function closeCertificationsModal() {
+    const modal = document.getElementById('certificationsModal');
+    modal.classList.remove('active');
+}
+
+// Inicializar funcionalidade do modal
+function initCertificationsModal() {
+    const modal = document.getElementById('certificationsModal');
+    if (!modal) {
+        console.warn('Certifications modal not found in DOM');
+        return;
+    }
+    
+    // Event listeners para abas
+    document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            switchTab(tabName);
+        });
+    });
+    
+    // Event listeners para fechar modal
+    document.querySelectorAll('.modal-close, .btn-modal-close').forEach(btn => {
+        btn.addEventListener('click', closeCertificationsModal);
+    });
+    
+    // Fechar ao clicar fora do modal
+    modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeCertificationsModal();
+        }
+    });
+    
+    // Fechar com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('certificationsModal');
+            if (modal && modal.classList.contains('active')) {
+                closeCertificationsModal();
+            }
+        }
     });
 }
 
@@ -257,6 +472,9 @@ function initPartnershipDashboard() {
     
     // Renderizar badges de especializações
     renderSpecializationsBadges(partnerData.specializations);
+    
+    // Inicializar modal de certificações
+    initCertificationsModal();
 }
 
 // Inicializar quando o DOM estiver pronto
