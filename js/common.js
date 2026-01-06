@@ -1,23 +1,56 @@
 // WatchGuard Partner Portal - Common JavaScript
 
-// Load header and footer
+// Load header and footer with absolute paths (works better with GitHub Pages)
 document.addEventListener('DOMContentLoaded', function() {
-    // Load header
-    fetch('includes/header.html')
+    // Load header - try absolute path first, then fallback to relative
+    fetch('/includes/header.html')
+        .then(response => {
+            if (!response.ok) {
+                // Fallback: try relative path
+                return fetch('includes/header.html');
+            }
+            return response;
+        })
         .then(response => response.text())
         .then(html => {
             document.getElementById('header-placeholder').innerHTML = html;
             initializeMenu();
         })
-        .catch(error => console.error('Error loading header:', error));
+        .catch(error => {
+            console.error('Error loading header:', error);
+            // Final fallback: try relative path
+            fetch('includes/header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-placeholder').innerHTML = html;
+                    initializeMenu();
+                })
+                .catch(err => console.error('Error loading header (final fallback):', err));
+        });
 
-    // Load footer
-    fetch('includes/footer.html')
+    // Load footer - try absolute path first, then fallback to relative
+    fetch('/includes/footer.html')
+        .then(response => {
+            if (!response.ok) {
+                // Fallback: try relative path
+                return fetch('includes/footer.html');
+            }
+            return response;
+        })
         .then(response => response.text())
         .then(html => {
             document.getElementById('footer-placeholder').innerHTML = html;
         })
-        .catch(error => console.error('Error loading footer:', error));
+        .catch(error => {
+            console.error('Error loading footer:', error);
+            // Final fallback: try relative path
+            fetch('includes/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-placeholder').innerHTML = html;
+                })
+                .catch(err => console.error('Error loading footer (final fallback):', err));
+        });
 });
 
 // Initialize menu functionality

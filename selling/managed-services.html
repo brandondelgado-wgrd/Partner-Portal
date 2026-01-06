@@ -273,10 +273,16 @@
 
     <!-- Common JavaScript -->
     <script>
-        // Adjust paths for subdirectory
+        // Load header and footer with absolute paths
         document.addEventListener('DOMContentLoaded', function() {
-            // Load header
-            fetch('../includes/header.html')
+            // Load header - try absolute path first, then fallback
+            fetch('/includes/header.html')
+                .then(response => {
+                    if (!response.ok) {
+                        return fetch('../includes/header.html');
+                    }
+                    return response;
+                })
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('header-placeholder').innerHTML = html;
@@ -284,15 +290,42 @@
                         initializeMenu();
                     }
                 })
-                .catch(error => console.error('Error loading header:', error));
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    // Final fallback
+                    fetch('../includes/header.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('header-placeholder').innerHTML = html;
+                            if (typeof initializeMenu === 'function') {
+                                initializeMenu();
+                            }
+                        })
+                        .catch(err => console.error('Error loading header (fallback):', err));
+                });
 
-            // Load footer
-            fetch('../includes/footer.html')
+            // Load footer - try absolute path first, then fallback
+            fetch('/includes/footer.html')
+                .then(response => {
+                    if (!response.ok) {
+                        return fetch('../includes/footer.html');
+                    }
+                    return response;
+                })
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('footer-placeholder').innerHTML = html;
                 })
-                .catch(error => console.error('Error loading footer:', error));
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                    // Final fallback
+                    fetch('../includes/footer.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('footer-placeholder').innerHTML = html;
+                        })
+                        .catch(err => console.error('Error loading footer (fallback):', err));
+                });
 
             // Ajustar colunas dos value-cards baseado no número de cards
             const valueCardsContainers = document.querySelectorAll('.value-cards');
@@ -308,9 +341,20 @@
                 }
             });
 
-            // Load MDR Calculator
-            fetch('../Tools/MDR Profit Calculator/MDR Profit Calculator v1.html')
+            // Load MDR Calculator - try absolute path first, then fallback
+            fetch('/Tools/MDR Profit Calculator/MDR Profit Calculator v1.html')
+                .then(response => {
+                    if (!response.ok) {
+                        return fetch('../Tools/MDR Profit Calculator/MDR Profit Calculator v1.html');
+                    }
+                    return response;
+                })
                 .then(response => response.text())
+                .catch(error => {
+                    console.error('Error loading MDR Calculator:', error);
+                    return fetch('../Tools/MDR Profit Calculator/MDR Profit Calculator v1.html')
+                        .then(response => response.text());
+                })
                 .then(html => {
                     const calculatorPlaceholder = document.getElementById('mdr-calculator-placeholder');
                     if (calculatorPlaceholder) {
