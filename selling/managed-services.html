@@ -64,16 +64,34 @@
             color: var(--watchguard-red);
         }
 
+        /* Extra padding for specific sections */
+        .two-column-image-section {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        /* MDR Profit Calculator Section - Extra padding */
+        section.content-section:has(#mdr-calculator-placeholder) {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .two-column-image-section {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+                padding-top: 3rem;
+                padding-bottom: 3rem;
             }
 
             /* Imagem primeiro apenas quando não for content-first */
             .two-column-image-section:not(.content-first) .section-image {
                 order: -1;
+            }
+
+            section.content-section:has(#mdr-calculator-placeholder) {
+                padding-top: 3rem;
             }
         }
     </style>
