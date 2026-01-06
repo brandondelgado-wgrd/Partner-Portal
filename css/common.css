@@ -23,13 +23,20 @@ body {
     font-family: 'Roboto', sans-serif;
     color: var(--dark-gray);
     line-height: 1.6;
+    padding-top: 80px; /* Espaço para o header fixo */
 }
 
 /* ==================== HEADER ==================== */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     background: var(--white);
     border-bottom: 1px solid #ddd;
     padding: 1rem 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -1137,7 +1144,7 @@ footer {
 .value-cards {
     display: grid;
     gap: 1.5rem;
-    margin: 3rem 0;
+    margin: 0 0 3rem 0;
 }
 
 /* 2 colunas para números pares */
@@ -1280,8 +1287,9 @@ footer {
 /* Sidebar */
 .sidebar {
     position: sticky;
-    top: 2rem;
+    top: calc(80px + 2rem); /* Header fixo (80px) + margem (2rem) */
     height: fit-content;
+    z-index: 100; /* Abaixo do header (z-index: 1000) */
 }
 
 .sidebar-card {
