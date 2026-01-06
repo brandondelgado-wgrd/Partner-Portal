@@ -1,0 +1,384 @@
+<!-- MDR Profit Calculator - Content only (to be inserted into a page) -->
+<style>
+    /* Calculator-specific styles only */
+    :root {
+      --calc-dark-blue: #000000;
+      --calc-dark-gray: #333333;
+      --calc-gray: #666666;
+      --calc-light-gray: #F8F8F8;
+    }
+
+    /* Calculator container */
+    .mdr-calculator-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+    }
+    .form-card {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      flex: 0 0 calc(40% - 10px);
+      min-width: 300px;
+      margin-bottom: 20px;
+    }
+    .result-card {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      flex: 0 0 calc(60% - 10px);
+      min-width: 300px;
+      margin-bottom: 20px;
+    }
+    .form-card h2, .result-card h2 {
+      color: var(--calc-dark-blue);
+      font-size: 1.286rem; /* 18px baseado em 14px */
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.929rem; /* 13px baseado em 14px */
+      margin-bottom: 5px;
+      color: var(--calc-dark-gray);
+    }
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Prefix wrapper for currency inputs */
+    .input-prefix-wrapper {
+      position: relative;
+    }
+    .input-prefix-wrapper .prefix {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--calc-dark-gray);
+      font-size: 0.929rem; /* 13px baseado em 14px */
+      pointer-events: none;
+    }
+    .input-prefix-wrapper input {
+      padding-left: 20px;
+    }
+    /* Remove advanced settings styles (not used in this version) */
+    /* Results table styling */
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem; /* 14px baseado em 14px */
+    }
+    .results-table th,
+    .results-table td {
+      padding: 6px 8px;
+      text-align: right;
+    }
+    .results-table th:first-child,
+    .results-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+    .results-table th {
+      color: var(--calc-dark-gray);
+      font-weight: 700;
+    }
+    .results-table td {
+      color: var(--calc-dark-gray);
+    }
+    .results-table td.positive {
+      color: #1ca652;
+    }
+    .results-table td.negative {
+      color: var(--watchguard-red);
+    }
+
+    .assumptions {
+      margin-top: 12px;
+      font-size: 0.857rem; /* 12px baseado em 14px */
+      color: #bdc3c7; /* light gray */
+    }
+    .assumptions ul {
+      list-style-type: disc;
+      margin: 4px 0 0 20px;
+      padding: 0;
+    }
+    .assumptions li {
+      margin-bottom: 0;
+      color: --medium-gray; /* light gray */
+    }
+
+    /* Tooltip styles */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      color: var(--watchguard-red);
+      margin-left: 4px;
+      font-weight: bold;
+      cursor: help;
+    }
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #ffffff;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 0.786rem; /* 11px baseado em 14px */
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s;
+      z-index: 100;
+    }
+    .tooltip:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Bar chart styles for results visualisation */
+    .bar-container {
+      width: 100%;
+      height: 10px;
+      background-color: var(--calc-light-gray);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+    .bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    .bar.green {
+      background-color: #1ca652;
+    }
+    .bar.blue {
+      /* Replace blue bar with a neutral grey for better eye comfort */
+      background-color: var(--calc-gray);
+    }
+    .bar.red {
+      background-color: var(--watchguard-red);
+    }
+
+    /* Colour specific result values */
+    #mrr {
+      color: var(--calc-dark-blue);
+    }
+    #acv {
+      color: var(--calc-dark-blue);
+    }
+    #costPerEndpoint {
+      color: var(--watchguard-red);
+    }
+
+    #staffSavingsWeek,
+    #staffSavingsYear {
+      color: #1ca652;
+    }
+    @media (max-width: 800px) {
+      .form-card, .result-card {
+        flex: 1 1 100%;
+        min-width: 100%;
+      }
+    }
+  </style>
+
+<div class="mdr-calculator-container">
+      <div class="form-card">
+      <h2>Inputs</h2>
+      <div class="form-group">
+        <label for="endpoints">Total Endpoints Managed
+          <span class="tooltip" data-tooltip="Total number of endpoints across all customers (desktops, laptops, servers, etc.).">?</span>
+        </label>
+        <input type="number" id="endpoints" placeholder="1000" value="1000">
+      </div>
+      <div class="form-group">
+        <label for="sellPrice">Sell price per endpoint (USD/month)
+          <span class="tooltip" data-tooltip="Your selling price per endpoint per month in USD.">?</span>
+        </label>
+        
+        <div class="input-prefix-wrapper">
+          <span class="prefix">$</span>
+          <input type="number" step="0.01" id="sellPrice" placeholder="10" value="10">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="premiumPrice">Premium sell price per endpoint (USD/month)
+          <span class="tooltip" data-tooltip="Optional premium price to charge for the Total MDR service. If left blank, the base sell price will be used for Total MDR.">?</span>
+        </label>
+        <div class="input-prefix-wrapper">
+          <span class="prefix">$</span>
+          <input type="number" step="0.01" id="premiumPrice" placeholder="15" value="15">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="customers">Number of customers
+          <span class="tooltip" data-tooltip="Total number of customers you plan to serve.">?</span>
+        </label>
+        <input type="number" id="customers" placeholder="10" value="10">
+      </div>
+      <div class="form-group">
+        <label for="alertsPerCustomer">Alerts per customer per week
+          <span class="tooltip" data-tooltip="Average number of alerts generated by each customer per week.">?</span>
+        </label>
+        <input type="number" id="alertsPerCustomer" placeholder="25" value="25">
+      </div>
+      
+    </div>
+    <div class="result-card">
+      <h2>Results</h2>
+      <table class="results-table">
+        <thead>
+          <tr>
+            
+            <th></th>
+            <th>
+              Total MDR
+              <span class="tooltip" data-tooltip="Total MDR is the full stack with WatchGuard products (e.g., Firewall, Endpoint, AuthPoint).">?</span>
+            </th>
+            <th>
+              Core MDR
+              <span class="tooltip" data-tooltip="Core MDR includes endpoint protection using WatchGuard EDR or Microsoft Defender, without the full stack.">?</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monthly Recurring Revenue:</td>
+            <td id="mrrTotal">$0.00</td>
+            <td id="mrrCore">$0.00</td>
+          </tr>
+          <tr>
+            <td>Annual Contract Value:</td>
+            <td id="acvTotal">$0.00</td>
+            <td id="acvCore">$0.00</td>
+          </tr>
+          <tr>
+            <td>Annual Profit:</td>
+            <td id="profitYearTotal" class="positive">$0.00</td>
+            <td id="profitYearCore" class="positive">$0.00</td>
+          </tr>
+          <tr>
+            <td>Profit Margin:</td>
+            <td id="marginTotal">0.0%</td>
+            <td id="marginCore">0.0%</td>
+          </tr>
+          <tr>
+            <td>Time Back Not Chasing Alerts (Weekly):</td>
+            <td id="timeBackTotal">0.00 hrs</td>
+            <td id="timeBackCore">0.00 hrs</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="assumptions">
+        <p><strong>Assumptions:</strong></p>
+        <ul>
+          <li>Alert handling time is estimated at 15 minutes per alert.</li>
+          <li>Calculations are based on a 40-hour work week.</li>
+          <li>Results reflect a 12-month contract term.</li>
+          <li>MDR cost is based on WatchGuard points.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Determine points (cost) per endpoint using license bands.  These values represent
+    // WatchGuard Total MDR points for each endpoint tier.  Core MDR points are
+    // calculated as 80% of the Total MDR points (20% discount).
+    function getLicenseCost(endpoints) {
+      if (endpoints <= 50) return 9.5;
+      if (endpoints <= 100) return 8.5;
+      if (endpoints <= 250) return 7.5;
+      if (endpoints <= 500) return 7.0;
+      if (endpoints <= 1000) return 6.0;
+      if (endpoints <= 5000) return 5.85;
+      return 5.75;
+    }
+
+    function formatCurrency(value) {
+      return '$' + value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function recalculate() {
+      const endpoints = parseFloat(document.getElementById('endpoints').value) || 0;
+      const sellPrice = parseFloat(document.getElementById('sellPrice').value) || 0;
+      // Premium sell price for Total MDR; if not provided, fall back to the base sell price
+      const premiumInput = document.getElementById('premiumPrice').value;
+      let premiumPrice = parseFloat(premiumInput);
+      if (isNaN(premiumPrice) || premiumInput.trim() === '') {
+        premiumPrice = sellPrice;
+      }
+      const customers = parseFloat(document.getElementById('customers').value) || 0;
+      const alertsPerCustomer = parseFloat(document.getElementById('alertsPerCustomer').value) || 0;
+      // Fixed assumptions
+      const termMonths = 12;
+      const handlingTime = 15; // minutes per alert
+
+      // Calculate cost per endpoint for Total and Core MDR using points
+      let costTotal = 0;
+      let costCore = 0;
+      if (endpoints > 0) {
+        costTotal = getLicenseCost(endpoints);
+        costCore = parseFloat((costTotal * 0.8).toFixed(2));
+      }
+
+      // Revenue: separate MRR and ACV for Total (using premium price) and Core (using base price)
+      const mrrTotal = endpoints * premiumPrice;
+      const acvTotal = mrrTotal * termMonths;
+      const mrrCore = endpoints * sellPrice;
+      const acvCore = mrrCore * termMonths;
+
+      // Profit calculations
+      const profitPerEndpointTotal = premiumPrice - costTotal;
+      const profitPerEndpointCore = sellPrice - costCore;
+      const profitYearTotal = profitPerEndpointTotal * endpoints * termMonths;
+      const profitYearCore = profitPerEndpointCore * endpoints * termMonths;
+      const marginTotal = premiumPrice > 0 ? ((premiumPrice - costTotal) / premiumPrice) * 100 : 0;
+      const marginCore = sellPrice > 0 ? ((sellPrice - costCore) / sellPrice) * 100 : 0;
+
+      // Time back per customer: hours per week not spent on alerts
+      const timeBackWeekly = alertsPerCustomer * handlingTime / 60; // hours per week per customer
+
+      // Update UI: populate Total and Core columns
+      document.getElementById('mrrTotal').textContent = formatCurrency(mrrTotal);
+      document.getElementById('mrrCore').textContent = formatCurrency(mrrCore);
+      document.getElementById('acvTotal').textContent = formatCurrency(acvTotal);
+      document.getElementById('acvCore').textContent = formatCurrency(acvCore);
+      document.getElementById('profitYearTotal').textContent = formatCurrency(profitYearTotal);
+      document.getElementById('profitYearCore').textContent = formatCurrency(profitYearCore);
+      document.getElementById('marginTotal').textContent = marginTotal.toFixed(1) + '%';
+      document.getElementById('marginCore').textContent = marginCore.toFixed(1) + '%';
+      // Append ' hrs' to clarify hours
+      document.getElementById('timeBackTotal').textContent = timeBackWeekly.toFixed(2) + ' hrs';
+      document.getElementById('timeBackCore').textContent = timeBackWeekly.toFixed(2) + ' hrs';
+
+      // Apply positive/negative classes based on profit
+      const profitTotalElem = document.getElementById('profitYearTotal');
+      const profitCoreElem = document.getElementById('profitYearCore');
+      profitTotalElem.className = profitYearTotal >= 0 ? 'positive' : 'negative';
+      profitCoreElem.className = profitYearCore >= 0 ? 'positive' : 'negative';
+    }
+
+    document.getElementById('endpoints').addEventListener('input', recalculate);
+    document.getElementById('sellPrice').addEventListener('input', recalculate);
+    document.getElementById('customers').addEventListener('input', recalculate);
+    document.getElementById('alertsPerCustomer').addEventListener('input', recalculate);
+    document.getElementById('premiumPrice').addEventListener('input', recalculate);
+    // Initial calculation
+    recalculate();
+  </script>

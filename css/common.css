@@ -12,6 +12,7 @@
     --footer-bg: #232D37;
     --medium-gray: #7f8c8d;
     --light-gray: #ecf0f1;
+    --black: #000000;
     --white: #ffffff;
 }
 
@@ -21,7 +22,7 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
-    color: var(--dark-gray);
+    color: var(--black);
     line-height: 1.6;
     padding-top: 80px; /* Espaço para o header fixo */
 }
@@ -1239,7 +1240,7 @@ footer {
 }
 
 .content-section p {
-    color: var(--medium-gray);
+    color: var(--dark-gray);
     line-height: 1.8;
     margin-bottom: 1rem;
     font-size: 1rem;
@@ -1247,7 +1248,7 @@ footer {
 
 .content-section ul,
 .content-section ol {
-    color: var(--medium-gray);
+    color: var(--dark-gray);
     line-height: 1.8;
     margin-bottom: 1.5rem;
     padding-left: 1.5rem;

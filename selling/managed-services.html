@@ -172,6 +172,13 @@
                     </div>
                 </section>
 
+                <!-- MDR Profit Calculator Section -->
+                <section class="content-section">
+                    <h2>MDR Profit Calculator</h2>
+                    <p>Estimate your revenue and profit from selling WatchGuard Core MDR and Total MDR. Enter your total endpoints, endpoint sell price, number of customers, and weekly alert volume. You can also test a higher price for Total MDR to see how margins improve. The calculator applies WatchGuard’s pricing to show your MRR, ACV, profit, margin, and time saved. When finished, export your results as a PDF summary.</p>
+                    <div id="mdr-calculator-placeholder"></div>
+                </section>
+
                 <!-- Opportunity Section -->
                 <section class="content-section">
                     <h2>Capitalize on the MDR Opportunity</h2>
@@ -282,6 +289,33 @@
                     container.classList.add('columns-3');
                 }
             });
+
+            // Load MDR Calculator
+            fetch('../Tools/MDR Profit Calculator/MDR Profit Calculator v1.html')
+                .then(response => response.text())
+                .then(html => {
+                    const calculatorPlaceholder = document.getElementById('mdr-calculator-placeholder');
+                    if (calculatorPlaceholder) {
+                        // Extract script content (scripts in innerHTML don't execute automatically)
+                        const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
+                        const htmlWithoutScript = html.replace(/<script>[\s\S]*?<\/script>/, '').trim();
+                        
+                        // Insert HTML first
+                        calculatorPlaceholder.innerHTML = htmlWithoutScript;
+                        
+                        // Execute script after HTML is inserted
+                        if (scriptMatch && scriptMatch[1]) {
+                            try {
+                                const script = document.createElement('script');
+                                script.textContent = scriptMatch[1];
+                                document.body.appendChild(script);
+                            } catch (error) {
+                                console.error('Error executing calculator script:', error);
+                            }
+                        }
+                    }
+                })
+                .catch(error => console.error('Error loading MDR calculator:', error));
         });
     </script>
     <script src="../js/common.js"></script>
