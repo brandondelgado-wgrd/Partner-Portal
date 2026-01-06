@@ -14,6 +14,9 @@
       flex-wrap: wrap;
       gap: 20px;
       width: 100%;
+      position: relative;
+      z-index: 10; /* Garante que a calculadora e seus tooltips fiquem acima de outros elementos */
+      overflow: visible; /* Permite que tooltips apareçam fora do container se necessário */
     }
     .form-card {
       background-color: #ffffff;
@@ -23,6 +26,8 @@
       flex: 0 0 calc(40% - 10px);
       min-width: 300px;
       margin-bottom: 20px;
+      position: relative;
+      overflow: visible; /* Permite que tooltips apareçam */
     }
     .result-card {
       background-color: #ffffff;
@@ -32,6 +37,8 @@
       flex: 0 0 calc(60% - 10px);
       min-width: 300px;
       margin-bottom: 20px;
+      position: relative;
+      overflow: visible; /* Permite que tooltips apareçam */
     }
     .form-card h2, .result-card h2 {
       color: var(--calc-dark-blue);
@@ -138,11 +145,21 @@
       padding: 5px 8px;
       border-radius: 4px;
       font-size: 0.786rem; /* 11px baseado em 14px */
-      white-space: nowrap;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.2s;
-      z-index: 100;
+      z-index: 999; /* Alto o suficiente para ficar acima de outros elementos, mas abaixo do header (1000) */
+      pointer-events: none; /* Permite cliques através do tooltip quando visível */
+      min-width: 150px;
+      max-width: 250px;
+      white-space: normal; /* Permite quebra de linha para tooltips longos */
+      word-wrap: break-word;
+    }
+    /* Ajuste para tooltips na última coluna da tabela - aparece à direita para não sair do frame */
+    .results-table th:last-child .tooltip::after {
+      left: auto;
+      right: 0;
+      transform: translateX(0);
     }
     .tooltip:hover::after {
       opacity: 1;
