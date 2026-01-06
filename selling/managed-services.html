@@ -18,6 +18,31 @@
 
     <!-- Page-specific styles -->
     <style>
+        /* Two Column Image Section */
+        .two-column-image-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .section-image {
+            width: 100%;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+        }
+
         /* Question List - Specific to MDR page */
         .question-list {
             list-style: none;
@@ -37,6 +62,19 @@
             position: absolute;
             left: 0;
             color: var(--watchguard-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .two-column-image-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            /* Imagem primeiro apenas quando não for content-first */
+            .two-column-image-section:not(.content-first) .section-image {
+                order: -1;
+            }
         }
     </style>
 </head>
@@ -96,45 +134,42 @@
                     </div>
                 </div>
 
-                <!-- Why Sell MDR Section -->
-                <section class="content-section">
-                    <h2>Why Sell WatchGuard MDR</h2>
-                    <p>WatchGuard MDR transforms your security practice by delivering enterprise-grade protection without the operational overhead. Here's how it benefits your business:</p>
-
-                    <ul class="feature-list">
-                        <li><strong>Recurring Revenue –</strong> Predictable, high-margin services (20%+)</li>
-                        <li><strong>Easy to Deliver –</strong> No SOC to build, no new staff to hire</li>
-                        <li><strong>Built on Existing Tools –</strong> Microsoft Defender, WatchGuard Endpoint, Firebox, AuthPoint, and cloud platforms</li>
-                        <li><strong>Fast Onboarding –</strong> Live in hours, not weeks</li>
-                    </ul>
-                </section>
-
                 <!-- Why Customers Buy MDR Section -->
-                <section class="content-section">
-                    <h2>Why Customers Buy MDR</h2>
-                    <p>Your customers need 24/7 protection, but most lack the resources to staff a full-time SOC. WatchGuard MDR provides the coverage they need with the peace of mind they want:</p>
+                <section class="content-section two-column-image-section">
+                    <div class="section-image">
+                        <img src="/assets/mdr-2.jpg" alt="WatchGuard MDR">
+                    </div>
+                    <div class="section-content">
+                        <h2>Why Customers Buy MDR</h2>
+                        <p>Your customers need 24/7 protection, but most lack the resources to staff a full-time SOC. WatchGuard MDR provides the coverage they need with the peace of mind they want:</p>
 
-                    <ul class="feature-list">
-                        <li><strong>Real Response –</strong> Threats contained in under 6 minutes on average</li>
-                        <li><strong>Low Alert Noise –</strong> ~6 alerts per month, &lt;1 false positive</li>
-                        <li><strong>Complete Coverage –</strong> Endpoint, network, identity, and cloud</li>
-                        <li><strong>Peace of Mind –</strong> 24/7 monitoring, even after hours</li>
-                    </ul>
+                        <ul class="feature-list">
+                            <li><strong>Real Response –</strong> Threats contained in under 6 minutes on average</li>
+                            <li><strong>Low Alert Noise –</strong> ~6 alerts per month, &lt;1 false positive</li>
+                            <li><strong>Complete Coverage –</strong> Endpoint, network, identity, and cloud</li>
+                            <li><strong>Peace of Mind –</strong> 24/7 monitoring, even after hours</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <!-- Is MDR Right Section -->
-                <section class="content-section">
-                    <h2>Is MDR Right for You or Your Customers?</h2>
-                    <p>Ask these critical questions to determine if MDR is the right solution:</p>
+                <section class="content-section two-column-image-section content-first">
+                    <div class="section-content">
+                        <h2>Is MDR Right for You or Your Customers?</h2>
+                        <p>Ask these critical questions to determine if MDR is the right solution:</p>
 
-                    <ul class="question-list">
-                        <li>Who monitors alerts after hours or during vacations?</li>
-                        <li>How quickly could ransomware be contained?</li>
-                        <li>Who responds if an endpoint, firewall, or user account is compromised?</li>
-                        <li>Can your team provide true 24/7 coverage without alert fatigue?</li>
-                    </ul>
+                        <ul class="question-list">
+                            <li>Who monitors alerts after hours or during vacations?</li>
+                            <li>How quickly could ransomware be contained?</li>
+                            <li>Who responds if an endpoint, firewall, or user account is compromised?</li>
+                            <li>Can your team provide true 24/7 coverage without alert fatigue?</li>
+                        </ul>
 
-                    <p>If these questions expose gaps in coverage or response speed, it's time to explore MDR.</p>
+                        <p>If these questions expose gaps in coverage or response speed, it's time to explore MDR.</p>
+                    </div>
+                    <div class="section-image">
+                        <img src="/assets/20210920.webp" alt="WatchGuard MDR">
+                    </div>
                 </section>
 
                 <!-- Opportunity Section -->
