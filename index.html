@@ -23,10 +23,17 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
+            padding-top: 2rem; /* Espaço extra no topo para garantir que o menu não cubra o conteúdo */
+            position: relative;
+            z-index: 1; /* Abaixo do header que tem z-index: 1000 */
         }
 
         .welcome-header {
             margin-bottom: 2rem;
+            margin-top: 0;
+            padding-left: 3rem;
+            position: relative;
+            z-index: 1; /* Garante que fique abaixo do header */
         }
 
         .welcome-header h1 {
@@ -233,7 +240,8 @@
             padding: 1.5rem;
             height: fit-content;
             position: sticky;
-            top: 2rem;
+            top: calc(80px + 2rem); /* Abaixo do header fixo (80px) + margem (2rem) */
+            z-index: 1; /* Abaixo do header que tem z-index: 1000 */
         }
 
         .quick-links h3 {
