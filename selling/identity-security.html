@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selling Identity Security | WatchGuard Partner Portal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="../css/common.css">
+
+    <!-- Page-specific styles -->
+    <style>
+        /* Product Cards - Specific to Identity Security page */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--watchguard-red);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card-icon {
+            font-size: 2.5rem;
+            color: var(--watchguard-red);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .product-card h4 {
+            color: var(--watchguard-red);
+            font-size: 1.286rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .product-card h4 i {
+            font-size: 1.5rem;
+        }
+
+        .product-card p {
+            color: var(--medium-gray);
+            font-size: 0.929rem;
+            line-height: 1.6;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Feature List with Icons */
+        .feature-list-icon {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list-icon li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list-icon li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--watchguard-red);
+        }
+
+        /* Sidebar scroll fix - permite scroll interno quando há muito conteúdo */
+        .sidebar {
+            max-height: calc(100vh - 120px); /* Altura da viewport menos header e margem */
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar para a sidebar */
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--watchguard-red);
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #c01008;
+        }
+
+        /* Accordion Styles for Sidebar Cards */
+        .sidebar-card {
+            position: relative;
+        }
+
+        .sidebar-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sidebar-card-header h3 {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .accordion-toggle {
+            background: transparent;
+            border: none;
+            color: var(--watchguard-red);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+        }
+
+        .accordion-toggle:hover {
+            background: rgba(232, 20, 16, 0.1);
+        }
+
+        .accordion-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-card.collapsed .accordion-toggle i {
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-card-content {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease, margin-top 0.3s ease;
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+
+        .sidebar-card.collapsed .sidebar-card-content {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        /* Primeiro card (Resources) sempre aberto por padrão - não precisa de regra especial */
+
+        /* Content with Image Side by Side */
+        .content-with-image {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin: 2rem 0;
+        }
+
+        .content-with-image .content-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-with-image .feature-list-icon {
+            margin: 0;
+        }
+
+        .content-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            object-fit: contain;
+        }
+
+        @media (max-width: 992px) {
+            .content-with-image {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .content-with-image .content-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                max-height: none;
+                overflow-y: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (loaded dynamically) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">Go-To-Market Solution</div>
+                <h1>Selling Identity Security</h1>
+                <p class="subtitle">Capitalize on the Rapidly Growing Identity Security Market</p>
+                <p class="subtitle">The global market outlook for identity security is significant, at $80 billion in 2022 and an expected $121.5 billion by the end of 2025. This represents an incremental growth opportunity of more than $40 billion worldwide. With AuthPoint Identity Security you can evolve your portfolio and tap into the growing profitable opportunities of the authentication and credential management market.</p>
+            </div>
+            <div class="hero-image">
+                <img src="/assets/identity-security.jpg" alt="Identity Security">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="content-grid">
+            <!-- Main Content Column -->
+            <main>
+                <!-- Value Proposition Cards -->
+                <div class="value-cards">
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Identity-First Security</h3>
+                        <p>Enhance the organization's security and compliance with an identity-first approach that verifies every user access request.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Flexible Authentication</h3>
+                        <p>Multiple authentication methods to suit your business and user needs, including mobile apps, hardware tokens, and SSO.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Zero Trust</h3>
+                        <p>Configure risk-based policy management to assess and enforce user access controls, achieving zero trust by verifying every user access request.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card-icon">
+                            <i class="fas fa-shield-virus"></i>
+                        </div>
+                        <h3>Cyber Insurance Compliance</h3>
+                        <p>Meet necessary cyber insurance policy requirements with comprehensive identity security solutions.</p>
+                    </div>
+                </div>
+
+                <!-- Why Every Business Needs Identity Security Section -->
+                <section class="content-section">
+                    <h2>Why Every Business Needs Identity Security</h2>
+                    <p>Identity security is no longer optional—it's essential for protecting your customers' businesses from credential-based attacks. Here are five key reasons why every organization needs identity security:</p>
+
+                    <ol>
+                        <li><strong>Enhance the organization's security and compliance with an identity-first approach:</strong> Protect against credential-based incidents, which are the top risks that lead to data breaches. An identity-first security strategy ensures that every access attempt is verified before granting permissions.</li>
+
+                        <li><strong>Have flexible methods of authentication to suit your business and user needs:</strong> Support multiple authentication methods including mobile authenticator apps, hardware tokens, and SSO application portals. Enable secure hybrid work environments regardless of location while maintaining employee productivity.</li>
+
+                        <li><strong>Configure risk-based policy management to assess and enforce user access controls:</strong> Implement intelligent policies that adapt to risk levels, automatically requiring additional authentication when suspicious activity is detected.</li>
+
+                        <li><strong>Achieve zero trust by verifying every user access request across company resources:</strong> Never trust, always verify. Every access request is authenticated and authorized, regardless of location or network.</li>
+
+                        <li><strong>Meet necessary cyber insurance policy requirements:</strong> Many cyber insurance policies now require MFA and identity security measures. Help your customers meet these requirements while improving their security posture.</li>
+                    </ol>
+                </section>
+
+                <!-- AuthPoint Identity Security Product Family Section -->
+                <section class="content-section">
+                    <h2>AuthPoint Identity Security Product Family</h2>
+                    <p>AuthPoint provides a comprehensive identity security solution with multiple components designed to protect workforce identities:</p>
+
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <h4><i class="fas fa-mobile-alt"></i> Mobile Authenticator App</h4>
+                            <p>MFA for iOS and Android with online and offline MFA verification methods. Features PIN and biometric protection of mobile tokens for enhanced security.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4><i class="fas fa-laptop"></i> Corporate Laptop / PC</h4>
+                            <p>MFA for Windows and Mac with online and offline verification methods. Seamlessly integrates with existing corporate devices and workflows.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4><i class="fas fa-search"></i> Dark Web Scan</h4>
+                            <p>Search company domains to uncover if data breaches are found. Proactive monitoring service that detects compromised credentials.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4><i class="fas fa-key"></i> Hardware Authenticator Tokens</h4>
+                            <p>Add-on hardware tokens for non-mobile users and use cases. Provides additional authentication options for organizations with diverse user needs.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4><i class="fas fa-globe"></i> Web Single Sign-On (SSO) Application Portal</h4>
+                            <p>MFA protected SAML-based access to corporate applications. Enables secure access to multiple applications with a single authentication.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4><i class="fas fa-cloud"></i> WatchGuard Cloud Management</h4>
+                            <p>Configure and manage Zero Trust risk-based policies from a centralized console. Simplified administration and comprehensive visibility.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Selling AuthPoint MFA Section -->
+                <section class="content-section">
+                    <div class="content-with-image">
+                        <div class="content-side">
+                            <h2>Selling AuthPoint MFA</h2>
+                            <p>AuthPoint MFA is the simplest and most cost-effective way to bring multi-factor authentication to your customers. Deploying MFA across organizations addresses the top risks that lead to data breaches: credential-based incidents. Enable secure hybrid work environments regardless of location and maintain employee productivity with single sign-on (SSO) application portal.</p>
+
+                            <h3>Deliver an Optimized Authentication Experience</h3>
+                            <ul class="feature-list-icon">
+                                <li>Multiple tokens and authentication methods</li>
+                                <li>Online and offline verification for Windows and Mac</li>
+                                <li>Mobile AuthPoint app for iOS and Android</li>
+                                <li>PIN and biometric protection of mobile tokens</li>
+                            </ul>
+                        </div>
+                        <img src="/assets/authpoint.png" alt="AuthPoint" class="content-image">
+                    </div>
+
+                    <h3>Benefits of Multi-factor Authentication</h3>
+                    <ul class="feature-list">
+                        <li><strong>Prevents Credential-Based Attacks:</strong> Even if passwords are compromised, attackers cannot access accounts without the second factor.</li>
+                        <li><strong>Compliance Ready:</strong> Meets requirements for cyber insurance policies and regulatory compliance standards.</li>
+                        <li><strong>User-Friendly:</strong> Simple setup and intuitive user experience that doesn't disrupt productivity.</li>
+                        <li><strong>Cost-Effective:</strong> Affordable solution that provides enterprise-grade security without enterprise complexity.</li>
+                        <li><strong>Scalable:</strong> Easily deploy across organizations of any size, from small businesses to large enterprises.</li>
+                    </ul>
+                </section>
+
+                <!-- AuthPoint Total Identity Security Section -->
+                <section class="content-section">
+                    <h2>AuthPoint Total Identity Security</h2>
+                    <p>AuthPoint Total Identity Security includes all the features and functionalities of AuthPoint MFA, plus credential management services with dark web monitoring services, and a password manager.</p>
+
+                    <h3>Dark Web Monitoring Service</h3>
+                    <p>This is a proactive service that detects when credential information from monitored domains are discovered in newly acquired credential databases and published to the WatchGuard dark web monitoring platform.</p>
+                    <p>The service notifies both administrators and end users of the compromised credentials and enables remediation by those affected, such as forcing a password change and requiring multi-factor authentication.</p>
+
+                    <h3>Password Manager</h3>
+                    <p>Our password manager and corporate vault give organizations better control with its built-in advanced password generator and visibility into weak, reused/duplicates, and shared passwords. The password manager and credential vault are protected by a single, complex vault password, so users no longer need to remember all the individual credentials and we guide you to setting a strong one.</p>
+
+                    <ul class="feature-list">
+                        <li><strong>Advanced Password Generator:</strong> Create strong, unique passwords automatically</li>
+                        <li><strong>Password Health Monitoring:</strong> Identify weak, reused, or duplicate passwords</li>
+                        <li><strong>Shared Password Management:</strong> Securely share credentials within teams</li>
+                        <li><strong>Corporate Vault:</strong> Centralized credential management for IT administrators</li>
+                    </ul>
+                </section>
+
+                <!-- Go-to-Market Strategy Section -->
+                <section class="content-section">
+                    <h2>Elevate Your Go-to-Market Strategy with AuthPoint Identity Security</h2>
+                    <p>Successfully selling identity security requires a strategic approach. Here's how to maximize your opportunities:</p>
+
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <h4>Nurture Your Audience</h4>
+                            <p>Raise awareness about the growing threats that are caused by stolen credentials and how MFA, dark web monitoring, and password management can increase identity security while maintaining employee productivity and IT efficiency.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>Lead with AuthPoint MFA</h4>
+                            <p>Use the AuthPoint selling pitch to introduce user-centric MFA to prospects and customers who haven't adopted MFA. Start with the foundational MFA solution and demonstrate immediate value.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>Upsell to Total Identity Security</h4>
+                            <p>Upsell AuthPoint Total Identity Security to MFA customers who are ready to expand their identity security. Show them the additional value of dark web monitoring and password management.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>Leverage Free Trials</h4>
+                            <p>Take advantage of our free trials, which you can easily activate for customers in WatchGuard Cloud to allow end users to experience what the full AuthPoint license has to offer.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>Reach Out to Our Team</h4>
+                            <p>Need support running a campaign or hosting an event to address how important it is to enable multi-factor authentication? Our product experts are happy to join your event and geek out about identity and data protection with your audience.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="cta-section">
+                    <div class="cta-section-content">
+                        <h2>Start Selling AuthPoint Today</h2>
+                        <p>WatchGuard AuthPoint is the right solution at the right time to make MFA a reality for the businesses who desperately need it to block attacks. Contact your WatchGuard representative today to start incorporating this solution into your service offering.</p>
+                        <a href="https://learn.watchguard.com/" class="btn-cta">Start Your MFA Sales Certification Training Today</a>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Resources Card -->
+                <div class="sidebar-card collapsed">
+                    <div class="sidebar-card-header">
+                        <h3><i class="fas fa-folder-open"></i> Resources</h3>
+                        <button class="accordion-toggle" aria-label="Toggle Resources" aria-expanded="false">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-card-content">
+
+                    <a href="https://www.watchguard.com/help/docs/help-center/en-US/Content/en-US/authpoint/_intro/authpoint_help_front.html" target="_blank" class="resource-link">
+                        <i class="fas fa-book"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">AuthPoint Help</div>
+                            <div class="resource-link-desc">Complete documentation and guides</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widen.net/view/pdf/un9nzh4nec/PartnerBrief_Passport.pdf?t.download=true&u=zhprrj" target="_blank" class="resource-link">
+                        <i class="fas fa-file-pdf"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Passport Partner Brief</div>
+                            <div class="resource-link-desc">Partner program overview</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widencollective.com/portals/em017jki/AuthPoint_Product_Pack" target="_blank" class="resource-link">
+                        <i class="fas fa-box"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Product Pack</div>
+                            <div class="resource-link-desc">Complete AuthPoint materials</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.watchguard.com/tryauthpoint" target="_blank" class="resource-link">
+                        <i class="fas fa-play-circle"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Online Demos</div>
+                            <div class="resource-link-desc">See AuthPoint in action</div>
+                        </div>
+                    </a>
+
+                    <a href="https://p.widencdn.net/tne6zc/AuthPoint_RFP_Responses_2020" target="_blank" class="resource-link">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">AuthPoint RFP Responses</div>
+                            <div class="resource-link-desc">Respond to customer requests</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widencollective.com/portals/kh1lcyqx/AuthPointMarketingCampaignKit" target="_blank" class="resource-link">
+                        <i class="fas fa-bullhorn"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">AuthPoint Marketing Kit</div>
+                            <div class="resource-link-desc">Marketing campaign materials</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widencollective.com/portals/ujyu1q2a/MFACyber-Insurance" target="_blank" class="resource-link">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Cyber Insurance Marketing Kit</div>
+                            <div class="resource-link-desc">MFA and cyber insurance resources</div>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+
+                <!-- New Resources Card -->
+                <div class="sidebar-card collapsed">
+                    <div class="sidebar-card-header">
+                        <h3><i class="fas fa-star"></i> New Resources</h3>
+                        <button class="accordion-toggle" aria-label="Toggle New Resources" aria-expanded="false">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-card-content">
+
+                    <a href="https://www.watchguard.com/help/docs/help-center/en-US/Content/en-US/authpoint/pwd-mngr.html" target="_blank" class="resource-link">
+                        <i class="fas fa-key"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Total Identity Security - Password Manager</div>
+                            <div class="resource-link-desc">Password management guide</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.watchguard.com/help/docs/help-center/en-US/Content/en-US/authpoint/dark_web_monitor.html" target="_blank" class="resource-link">
+                        <i class="fas fa-search"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Total Identity Security - Dark Web Monitor</div>
+                            <div class="resource-link-desc">Dark web monitoring guide</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.watchguard.com/help/docs/help-center/en-US/Content/en-US/authpoint/authpoint_deployment-guide-tis.html" target="_blank" class="resource-link">
+                        <i class="fas fa-cog"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Total Identity Security Deployment Guide</div>
+                            <div class="resource-link-desc">Admin deployment guide</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.watchguard.com/help/docs/authpoint/en-US/AuthPoint%20Password%20Management%20Quick%20Start.pdf" target="_blank" class="resource-link">
+                        <i class="fas fa-file-pdf"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Password Manager Quick Start Guide</div>
+                            <div class="resource-link-desc">End-user quick start guide</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widencollective.com/portals/ipkdxdyq/AuthPointRiskFramework" target="_blank" class="resource-link">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">AuthPoint Risk Framework Partner Kit</div>
+                            <div class="resource-link-desc">Risk framework resources</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widen.net/s/td9z2x5k5v/partner_flyer_auth_self_service" target="_blank" class="resource-link">
+                        <i class="fas fa-user-cog"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">AuthPoint Self-Service Portal</div>
+                            <div class="resource-link-desc">Self-service portal flyer</div>
+                        </div>
+                    </a>
+
+                    <a href="https://watchguard.widencollective.com/portals/ltxrj9vd/DarkWebScannerMCK" target="_blank" class="resource-link">
+                        <i class="fas fa-globe"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Dark Web Scan Partner Kit</div>
+                            <div class="resource-link-desc">Dark web scanning resources</div>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Card -->
+                <div class="sidebar-card collapsed">
+                    <div class="sidebar-card-header">
+                        <h3><i class="fas fa-link"></i> Quick Links</h3>
+                        <button class="accordion-toggle" aria-label="Toggle Quick Links" aria-expanded="false">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-card-content">
+
+                    <a href="https://learn.watchguard.com/" target="_blank" class="resource-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Training Portal</div>
+                            <div class="resource-link-desc">Get certified on identity security</div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="resource-link">
+                        <i class="fas fa-headset"></i>
+                        <div class="resource-link-text">
+                            <div class="resource-link-title">Contact Support</div>
+                            <div class="resource-link-desc">Get help from our team</div>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer (loaded dynamically) -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Common JavaScript -->
+    <script>
+        // Load header and footer with absolute paths
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header - try absolute path first, then fallback
+            fetch('/includes/header.html')
+                .then(response => {
+                    if (!response.ok) {
+                        return fetch('../includes/header.html');
+                    }
+                    return response;
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-placeholder').innerHTML = html;
+                    if (typeof initializeMenu === 'function') {
+                        initializeMenu();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    // Final fallback
+                    fetch('../includes/header.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('header-placeholder').innerHTML = html;
+                            if (typeof initializeMenu === 'function') {
+                                initializeMenu();
+                            }
+                        })
+                        .catch(err => console.error('Error loading header (fallback):', err));
+                });
+
+            // Load footer - try absolute path first, then fallback
+            fetch('/includes/footer.html')
+                .then(response => {
+                    if (!response.ok) {
+                        return fetch('../includes/footer.html');
+                    }
+                    return response;
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-placeholder').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                    // Final fallback
+                    fetch('../includes/footer.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('footer-placeholder').innerHTML = html;
+                        })
+                        .catch(err => console.error('Error loading footer (fallback):', err));
+                });
+
+            // Ajustar colunas dos value-cards baseado no número de cards
+            const valueCardsContainers = document.querySelectorAll('.value-cards');
+            valueCardsContainers.forEach(container => {
+                const cardCount = container.children.length;
+                // Remove classes existentes
+                container.classList.remove('columns-2', 'columns-3');
+                // Adiciona classe baseada se é par ou ímpar
+                if (cardCount % 2 === 0) {
+                    container.classList.add('columns-2');
+                } else {
+                    container.classList.add('columns-3');
+                }
+            });
+
+            // Accordion functionality for sidebar cards
+            const accordionToggles = document.querySelectorAll('.accordion-toggle');
+            accordionToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const card = this.closest('.sidebar-card');
+                    const isCollapsed = card.classList.contains('collapsed');
+                    const content = card.querySelector('.sidebar-card-content');
+                    
+                    // Update aria-expanded
+                    this.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
+                    
+                    if (isCollapsed) {
+                        // Expand
+                        card.classList.remove('collapsed');
+                        // Set max-height to actual content height for smooth animation
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        // Collapse
+                        card.classList.add('collapsed');
+                        content.style.maxHeight = '0px';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>
