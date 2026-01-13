@@ -131,3 +131,57 @@ function initializeMenu() {
         }, 250);
     });
 }
+
+// Initialize sidebar accordion functionality
+function initializeSidebarAccordion() {
+    var cardHeaders = document.querySelectorAll('.sidebar-card-header');
+    cardHeaders.forEach(function(header) {
+        // Check if already initialized
+        if (header.hasAttribute('data-accordion-initialized')) {
+            return;
+        }
+        
+        header.setAttribute('data-accordion-initialized', 'true');
+        
+        header.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var card = this.closest('.sidebar-card');
+            if (!card) return;
+            
+            var isCollapsed = card.classList.contains('collapsed');
+            var content = card.querySelector('.sidebar-card-content');
+            var toggle = card.querySelector('.accordion-toggle');
+            
+            // Update aria-expanded on toggle button
+            if (toggle) {
+                toggle.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
+            }
+            
+            if (isCollapsed) {
+                // Expand
+                card.classList.remove('collapsed');
+                // Set max-height to actual content height for smooth animation
+                if (content) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            } else {
+                // Collapse
+                card.classList.add('collapsed');
+                if (content) {
+                    content.style.maxHeight = '0px';
+                }
+            }
+        });
+    });
+}
+
+// Initialize accordion when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    initializeSidebarAccordion();
+});
+
+// Also try to initialize after a short delay in case elements load later
+setTimeout(function() {
+    initializeSidebarAccordion();
+}, 100);
